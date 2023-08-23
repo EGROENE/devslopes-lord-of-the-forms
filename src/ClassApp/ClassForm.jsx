@@ -1,47 +1,56 @@
 import { Component } from "react";
 import { ErrorMessage } from "../ErrorMessage";
+import ClassTextInput from "./ClassTextInput";
+// Generate a ClassTextInput for every item in inputInfo:
+import { inputInfo } from "../../constants";
+import { allCities } from "../utils/all-cities";
 
-const firstNameErrorMessage = "First name must be at least 2 characters long";
+/* const firstNameErrorMessage = "First name must be at least 2 characters long";
 const lastNameErrorMessage = "Last name must be at least 2 characters long";
 const emailErrorMessage = "Email is Invalid";
-const cityErrorMessage = "State is Invalid";
+const cityErrorMessage = "State is Invalid"; */
 const phoneNumberErrorMessage = "Invalid Phone Number";
 
 export class ClassForm extends Component {
   render() {
+    const { userData, inputErrors, isNameValid, handleChange, isEmailValid } =
+      this.props;
     return (
       <form>
         <u>
           <h3>User Information Form</h3>
         </u>
+        {inputInfo.map((input) => (
+          <>
+            <ClassTextInput
+              input={input}
+              value={userData[`${input.id}`]}
+              onChange={(e) => {
+                isNameValid(e, input.id);
+                if (input.id.includes("Name")) {
+                  handleChange(e, input.id);
+                } else {
+                  isEmailValid(e);
+                }
+              }}
+            />
+            <ErrorMessage
+              message={input.errorMessage}
+              show={inputErrors[`${input.id}Error`]}
+            />
+          </>
+        ))}
 
-        {/* first name input */}
         <div className="input-wrap">
-          <label>{"First Name"}:</label>
-          <input placeholder="Bilbo" />
+          <label htmlFor="city">City:</label>
+          <select name="city" id="city">
+            {allCities.map((city) => (
+              <option key={city} selected={city === "Hobbiton"}>
+                {city}
+              </option>
+            ))}
+          </select>
         </div>
-        <ErrorMessage message={firstNameErrorMessage} show={true} />
-
-        {/* last name input */}
-        <div className="input-wrap">
-          <label>{"Last Name"}:</label>
-          <input placeholder="Baggins" />
-        </div>
-        <ErrorMessage message={lastNameErrorMessage} show={true} />
-
-        {/* Email Input */}
-        <div className="input-wrap">
-          <label>{"Email"}:</label>
-          <input placeholder="bilbo-baggins@adventurehobbits.net" />
-        </div>
-        <ErrorMessage message={emailErrorMessage} show={true} />
-
-        {/* City Input */}
-        <div className="input-wrap">
-          <label>{"City"}:</label>
-          <input placeholder="Hobbiton" />
-        </div>
-        <ErrorMessage message={cityErrorMessage} show={true} />
 
         <div className="input-wrap">
           <label htmlFor="phone">Phone:</label>
@@ -56,7 +65,7 @@ export class ClassForm extends Component {
           </div>
         </div>
 
-        <ErrorMessage message={phoneNumberErrorMessage} show={true} />
+        <ErrorMessage message={phoneNumberErrorMessage} />
 
         <input type="submit" value="Submit" />
       </form>
