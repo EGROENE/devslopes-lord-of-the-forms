@@ -39,9 +39,6 @@ export class ClassApp extends Component {
     }));
   };
 
-  // Validation methods, in the end, should be called upon submission of form, not onChange of their respective inputs.
-  // Ensure that errors go away once user has corrected fields. May need separate method to call onchange of inputs that checks error object to see if a field's error exists. This method should also set the value of the input.
-  // Setting error messages in state may not be necessary.
   isNameValid = (e, nameType) => {
     const value = e.target.value;
     // Should this not got here, but instead be part of both setStates in conditionals below? Seems more efficient, but should this be used only once? Which is the highest priority?
