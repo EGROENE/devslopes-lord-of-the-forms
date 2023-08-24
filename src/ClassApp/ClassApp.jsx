@@ -51,20 +51,6 @@ export class ClassApp extends Component {
     }));
   };
 
-  // maybe put this in validations.js
-  isNameValid = (value) => {
-    if (
-      value
-        .split("")
-        .every((char) => char.toLowerCase() !== char.toUpperCase()) &&
-      value.length >= 2
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
   render() {
     return (
       <>

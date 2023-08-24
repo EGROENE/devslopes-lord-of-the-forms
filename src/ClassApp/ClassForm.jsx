@@ -4,7 +4,7 @@ import ClassTextInput from "./ClassTextInput";
 // Generate a ClassTextInput for every item in similarInputs:
 import { similarInputs } from "../../constants";
 import { allCities } from "../utils/all-cities";
-import { isEmailValid } from "../utils/validations";
+import { isNameValid, isEmailValid } from "../utils/validations";
 import ClassPhoneInput from "./ClassPhoneInput";
 
 /* const firstNameErrorMessage = "First name must be at least 2 characters long";
@@ -15,14 +15,8 @@ const phoneNumberErrorMessage = "Invalid Phone Number";
 
 export class ClassForm extends Component {
   render() {
-    const {
-      userData,
-      inputErrors,
-      handleChange,
-      isNameValid,
-      setErrors,
-      resetErrors,
-    } = this.props;
+    const { userData, inputErrors, handleChange, setErrors, resetErrors } =
+      this.props;
     return (
       <form>
         <u>
