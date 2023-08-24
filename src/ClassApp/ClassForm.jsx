@@ -14,7 +14,14 @@ const phoneNumberErrorMessage = "Invalid Phone Number";
 
 export class ClassForm extends Component {
   render() {
-    const { userData, inputErrors, isNameValid, handleChange } = this.props;
+    const {
+      userData,
+      inputErrors,
+      handleChange,
+      isNameValid,
+      setErrors,
+      resetErrors,
+    } = this.props;
     return (
       <form>
         <u>
@@ -26,11 +33,25 @@ export class ClassForm extends Component {
               input={input}
               value={userData[`${input.id}`]}
               onChange={(e) => {
-                isNameValid(e, input.id);
+                handleChange(e, input.id);
+                // if input fails its validation, then set input's error; if it passes, reset its error
+                // seems I need to base what is passed into 'show' on input's individual error state; individualization of this failed otherwise
                 if (input.id.includes("Name")) {
-                  handleChange(e, input.id);
-                } else {
-                  isEmailValid(e);
+                  if (!isNameValid(e.target.value)) {
+                    // call setErrors
+                    setErrors(input.id);
+                  } else {
+                    // call resetErrors
+                    resetErrors(input.id);
+                  }
+                } else if (input.id.includes("email")) {
+                  if (!isEmailValid(e.target.value)) {
+                    // call setErrors
+                    setErrors(input.id);
+                  } else {
+                    // call resetErrors
+                    resetErrors(input.id);
+                  }
                 }
               }}
             />
@@ -43,7 +64,11 @@ export class ClassForm extends Component {
 
         <div className="input-wrap">
           <label htmlFor="city">City:</label>
-          <select name="city" id="city">
+          <select
+            name="city"
+            id="city"
+            onChange={(e) => handleChange(e, "city")}
+          >
             {allCities.map((city) => (
               <option key={city} selected={city === "Hobbiton"}>
                 {city}

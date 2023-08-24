@@ -17,7 +17,7 @@ export class ClassApp extends Component {
       firstName: "",
       lastName: "",
       phone: "",
-      city: "",
+      city: "Hobbiton",
     },
     inputErrors: {
       emailError: false,
@@ -39,9 +39,39 @@ export class ClassApp extends Component {
     }));
   };
 
-  isNameValid = (e, nameType) => {
-    const value = e.target.value;
+  setErrors = (inputType) => {
+    this.setState((prevState) => ({
+      ...prevState,
+      inputErrors: {
+        ...prevState.inputErrors,
+        [`${inputType}Error`]: true,
+      },
+    }));
+  };
+
+  resetErrors = (inputType) => {
+    this.setState((prevState) => ({
+      ...prevState,
+      inputErrors: {
+        ...prevState.inputErrors,
+        [`${inputType}Error`]: false,
+      },
+    }));
+  };
+
+  // maybe put this in validations.js
+  isNameValid = (value) => {
     if (
+      value
+        .split("")
+        .every((char) => char.toLowerCase() !== char.toUpperCase()) &&
+      value.length >= 2
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+    /* if (
       value
         .split("")
         .every((char) => char.toLowerCase() !== char.toUpperCase()) &&
@@ -62,7 +92,7 @@ export class ClassApp extends Component {
           [`${nameType}Error`]: true,
         },
       }));
-    }
+    } */
   };
 
   render() {
@@ -75,6 +105,8 @@ export class ClassApp extends Component {
           inputErrors={this.state.inputErrors}
           handleChange={this.handleChange}
           isNameValid={this.isNameValid}
+          setErrors={this.setErrors}
+          resetErrors={this.resetErrors}
         />
       </>
     );
