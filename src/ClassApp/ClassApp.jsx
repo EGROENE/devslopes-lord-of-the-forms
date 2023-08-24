@@ -2,21 +2,13 @@ import { Component } from "react";
 import { ClassForm } from "./ClassForm";
 import { ProfileInformation } from "../ProfileInformation";
 
-/* const defaultUser = {
-  email: "default@default.com",
-  firstName: "Default",
-  lastName: "Default",
-  phone: "1234567",
-  city: "Hobbiton",
-}; */
-
 export class ClassApp extends Component {
   state = {
     userData: {
       email: "",
       firstName: "",
       lastName: "",
-      phone: "",
+      phone: [],
       city: "Hobbiton",
     },
     inputErrors: {
@@ -71,28 +63,6 @@ export class ClassApp extends Component {
     } else {
       return false;
     }
-    /* if (
-      value
-        .split("")
-        .every((char) => char.toLowerCase() !== char.toUpperCase()) &&
-      value.length > 2
-    ) {
-      this.setState((prevState) => ({
-        ...prevState,
-        inputErrors: {
-          ...prevState.inputErrors,
-          [`${nameType}Error`]: false,
-        },
-      }));
-    } else {
-      this.setState((prevState) => ({
-        ...prevState,
-        inputErrors: {
-          ...prevState.inputErrors,
-          [`${nameType}Error`]: true,
-        },
-      }));
-    } */
   };
 
   render() {
