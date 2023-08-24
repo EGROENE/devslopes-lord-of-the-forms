@@ -41,14 +41,6 @@ export class ClassApp extends Component {
 
   isNameValid = (e, nameType) => {
     const value = e.target.value;
-    // Should this not got here, but instead be part of both setStates in conditionals below? Seems more efficient, but should this be used only once? Which is the highest priority?
-    /* this.setState((prevState) => ({
-      ...prevState,
-      userData: {
-        ...prevState.userData,
-        [`${nameType}`]: value,
-      },
-    })); */
     if (
       value
         .split("")
