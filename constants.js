@@ -1,5 +1,5 @@
 // Export this into ClassTextInput
-export const inputInfo = [
+export const similarInputs = [
   {
     id: "firstName",
     label: "First Name",

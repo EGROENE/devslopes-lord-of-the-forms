@@ -1,8 +1,8 @@
 import { Component } from "react";
 import { ErrorMessage } from "../ErrorMessage";
 import ClassTextInput from "./ClassTextInput";
-// Generate a ClassTextInput for every item in inputInfo:
-import { inputInfo } from "../../constants";
+// Generate a ClassTextInput for every item in similarInputs:
+import { similarInputs } from "../../constants";
 import { allCities } from "../utils/all-cities";
 import { isEmailValid } from "../utils/validations";
 
@@ -20,7 +20,7 @@ export class ClassForm extends Component {
         <u>
           <h3>User Information Form</h3>
         </u>
-        {inputInfo.map((input) => (
+        {similarInputs.map((input) => (
           <>
             <ClassTextInput
               input={input}
