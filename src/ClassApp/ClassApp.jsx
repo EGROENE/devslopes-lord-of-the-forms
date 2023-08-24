@@ -73,10 +73,6 @@ export class ClassApp extends Component {
     }
   };
 
-  isEmailValid = (e) => {
-    let value = e.target.value;
-  };
-
   render() {
     return (
       <>
@@ -87,7 +83,6 @@ export class ClassApp extends Component {
           inputErrors={this.state.inputErrors}
           handleChange={this.handleChange}
           isNameValid={this.isNameValid}
-          isEmailValid={this.isEmailValid}
         />
       </>
     );
