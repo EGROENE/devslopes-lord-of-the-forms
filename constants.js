@@ -19,3 +19,34 @@ export const similarInputs = [
     errorMessage: "Email is Invalid",
   },
 ];
+
+export const phoneInputs = [
+  {
+    type: "text",
+    id: "phone-input-1",
+    placeholder: "55",
+    minLength: 2,
+    maxLength: 2,
+  },
+  {
+    type: "text",
+    id: "phone-input-2",
+    placeholder: "55",
+    minLength: 2,
+    maxLength: 2,
+  },
+  {
+    type: "text",
+    id: "phone-input-3",
+    placeholder: "55",
+    minLength: 2,
+    maxLength: 2,
+  },
+  {
+    type: "text",
+    id: "phone-input-4",
+    placeholder: "5",
+    minLength: 1,
+    maxLength: 1,
+  },
+];
