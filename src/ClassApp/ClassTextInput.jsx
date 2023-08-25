@@ -1,6 +1,4 @@
 import React from "react";
-//import { similarInputs } from "../../constants";
-//import { ErrorMessage } from "../ErrorMessage";
 
 class ClassTextInput extends React.Component {
   render() {

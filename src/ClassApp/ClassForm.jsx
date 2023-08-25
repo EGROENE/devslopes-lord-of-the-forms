@@ -1,17 +1,10 @@
 import { Component } from "react";
 import { ErrorMessage } from "../ErrorMessage";
 import ClassTextInput from "./ClassTextInput";
-// Generate a ClassTextInput for every item in similarInputs:
 import { similarInputs } from "../../constants";
 import { allCities } from "../utils/all-cities";
 import { isNameValid, isEmailValid } from "../utils/validations";
 import ClassPhoneInput from "./ClassPhoneInput";
-
-/* const firstNameErrorMessage = "First name must be at least 2 characters long";
-const lastNameErrorMessage = "Last name must be at least 2 characters long";
-const emailErrorMessage = "Email is Invalid";
-const cityErrorMessage = "State is Invalid";
-const phoneNumberErrorMessage = "Invalid Phone Number"; */
 
 export class ClassForm extends Component {
   render() {
@@ -39,18 +32,14 @@ export class ClassForm extends Component {
                 // seems I need to base what is passed into 'show' on input's individual error state; individualization of this failed otherwise
                 if (input.id.includes("Name")) {
                   if (!isNameValid(e.target.value)) {
-                    // call setErrors
                     setErrors(input.id);
                   } else {
-                    // call resetErrors
                     resetErrors(input.id);
                   }
                 } else if (input.id.includes("email")) {
                   if (!isEmailValid(e.target.value)) {
-                    // call setErrors
                     setErrors(input.id);
                   } else {
-                    // call resetErrors
                     resetErrors(input.id);
                   }
                 }
