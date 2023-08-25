@@ -1,23 +1,27 @@
 import { Component } from "react";
 import { ClassForm } from "./ClassForm";
 import { ProfileInformation } from "../ProfileInformation";
+import { containsOnlyDigits } from "../utils/validations";
 
 export class ClassApp extends Component {
-  state = {
-    userData: {
-      email: "",
-      firstName: "",
-      lastName: "",
-      phone: [],
-      city: "Hobbiton",
-    },
-    inputErrors: {
-      emailError: false,
-      firstNameError: false,
-      lastNameError: false,
-      phoneError: false,
-    },
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      userData: {
+        email: "",
+        firstName: "",
+        lastName: "",
+        phone: ["", "", "", ""],
+        city: "Hobbiton",
+      },
+      inputErrors: {
+        emailError: false,
+        firstNameError: false,
+        lastNameError: false,
+        phoneError: false,
+      },
+    };
+  }
 
   // Method to update state value of input:
   handleChange = (e, inputType) => {
@@ -29,6 +33,24 @@ export class ClassApp extends Component {
         [`${inputType}`]: value,
       },
     }));
+  };
+
+  handlePhoneInput = (index) => (e) => {
+    // validation of input as digit should go in here
+    if (containsOnlyDigits(e.target.value)) {
+      const newPhoneState = this.state.userData.phone.map(
+        (phoneInput, phoneInputIndex) =>
+          index === phoneInputIndex ? e.target.value : phoneInput
+      );
+      console.log(newPhoneState);
+      this.setState((prevState) => ({
+        ...prevState,
+        userData: {
+          ...prevState.userData,
+          phone: newPhoneState,
+        },
+      }));
+    }
   };
 
   setErrors = (inputType) => {
@@ -63,6 +85,7 @@ export class ClassApp extends Component {
           isNameValid={this.isNameValid}
           setErrors={this.setErrors}
           resetErrors={this.resetErrors}
+          handlePhoneInput={this.handlePhoneInput}
         />
       </>
     );

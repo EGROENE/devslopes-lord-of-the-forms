@@ -10,13 +10,19 @@ import ClassPhoneInput from "./ClassPhoneInput";
 /* const firstNameErrorMessage = "First name must be at least 2 characters long";
 const lastNameErrorMessage = "Last name must be at least 2 characters long";
 const emailErrorMessage = "Email is Invalid";
-const cityErrorMessage = "State is Invalid"; */
-const phoneNumberErrorMessage = "Invalid Phone Number";
+const cityErrorMessage = "State is Invalid";
+const phoneNumberErrorMessage = "Invalid Phone Number"; */
 
 export class ClassForm extends Component {
   render() {
-    const { userData, inputErrors, handleChange, setErrors, resetErrors } =
-      this.props;
+    const {
+      userData,
+      inputErrors,
+      handleChange,
+      setErrors,
+      resetErrors,
+      handlePhoneInput,
+    } = this.props;
     return (
       <form>
         <u>
@@ -74,11 +80,11 @@ export class ClassForm extends Component {
 
         <div className="input-wrap">
           <label htmlFor="phone">Phone:</label>
-          <ClassPhoneInput />
+          <ClassPhoneInput
+            handlePhoneInput={handlePhoneInput}
+            userData={userData}
+          />
         </div>
-
-        <ErrorMessage message={phoneNumberErrorMessage} />
-
         <input type="submit" value="Submit" />
       </form>
     );
