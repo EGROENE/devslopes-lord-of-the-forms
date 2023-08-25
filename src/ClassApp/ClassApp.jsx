@@ -36,13 +36,11 @@ export class ClassApp extends Component {
   };
 
   handlePhoneInput = (index) => (e) => {
-    // validation of input as digit should go in here
     if (containsOnlyDigits(e.target.value)) {
       const newPhoneState = this.state.userData.phone.map(
         (phoneInput, phoneInputIndex) =>
           index === phoneInputIndex ? e.target.value : phoneInput
       );
-      console.log(newPhoneState);
       this.setState((prevState) => ({
         ...prevState,
         userData: {

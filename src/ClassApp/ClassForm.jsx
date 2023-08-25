@@ -77,7 +77,6 @@ export class ClassForm extends Component {
             ))}
           </select>
         </div>
-
         <div className="input-wrap">
           <label htmlFor="phone">Phone:</label>
           <ClassPhoneInput
