@@ -15,6 +15,7 @@ export class ClassForm extends Component {
       setErrors,
       resetErrors,
       handlePhoneInput,
+      phoneInputsParentElement,
     } = this.props;
     return (
       <form>
@@ -71,6 +72,7 @@ export class ClassForm extends Component {
           <ClassPhoneInput
             handlePhoneInput={handlePhoneInput}
             userData={userData}
+            phoneInputsParentElement={phoneInputsParentElement}
           />
         </div>
         <input type="submit" value="Submit" />

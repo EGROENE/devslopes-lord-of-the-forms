@@ -1,11 +1,12 @@
-import { Component } from "react";
+import React from "react";
 import { ClassForm } from "./ClassForm";
 import { ProfileInformation } from "../ProfileInformation";
 import { containsOnlyDigits } from "../utils/validations";
 
-export class ClassApp extends Component {
+export class ClassApp extends React.Component {
   constructor(props) {
     super(props);
+    this.phoneInputsParentElement = React.createRef();
     this.state = {
       userData: {
         email: "",
@@ -36,11 +37,13 @@ export class ClassApp extends Component {
   };
 
   handlePhoneInput = (index) => (e) => {
-    if (containsOnlyDigits(e.target.value)) {
+    const value = e.target.value;
+    if (containsOnlyDigits(value)) {
       const newPhoneState = this.state.userData.phone.map(
         (phoneInput, phoneInputIndex) =>
-          index === phoneInputIndex ? e.target.value : phoneInput
+          index === phoneInputIndex ? value : phoneInput
       );
+
       this.setState((prevState) => ({
         ...prevState,
         userData: {
@@ -48,6 +51,16 @@ export class ClassApp extends Component {
           phone: newPhoneState,
         },
       }));
+
+      const phoneInputDOMElements = Array.from(
+        this.phoneInputsParentElement.current.children
+      );
+
+      if (value.length === e.target.maxLength) {
+        phoneInputDOMElements[
+          phoneInputDOMElements.indexOf(e.target) + 1
+        ]?.focus();
+      }
     }
   };
 
@@ -84,6 +97,7 @@ export class ClassApp extends Component {
           setErrors={this.setErrors}
           resetErrors={this.resetErrors}
           handlePhoneInput={this.handlePhoneInput}
+          phoneInputsParentElement={this.phoneInputsParentElement}
         />
       </>
     );
