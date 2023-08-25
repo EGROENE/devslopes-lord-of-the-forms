@@ -11,7 +11,6 @@ class ClassTextInput extends React.Component {
           value={value}
           onChange={onChange}
         ></input>
-        {/* <ErrorMessage message={input.errorMessage} /> */}
       </div>
     );
   }
