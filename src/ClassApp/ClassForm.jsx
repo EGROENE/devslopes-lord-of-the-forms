@@ -16,6 +16,8 @@ export class ClassForm extends Component {
       resetErrors,
       handlePhoneInput,
       phoneInputsParentElement,
+      attemptedSubmissionTally,
+      handleSubmission,
     } = this.props;
     return (
       <form>
@@ -26,11 +28,12 @@ export class ClassForm extends Component {
           <>
             <ClassTextInput
               input={input}
-              value={userData[`${input.id}`]}
+              //value={userData[`${input.id}`]}
               onChange={(e) => {
                 handleChange(e, input.id);
                 // if input fails its validation, then set input's error; if it passes, reset its error
                 // seems I need to base what is passed into 'show' on input's individual error state; individualization of this failed otherwise
+                // Maybe put following if/else if logic inside a method (maybe handleChange) so that it can be called as long as attemptedSubmissionsTally is > 0.
                 if (input.id.includes("Name")) {
                   if (!isNameValid(e.target.value)) {
                     setErrors(input.id);
@@ -46,10 +49,12 @@ export class ClassForm extends Component {
                 }
               }}
             />
-            <ErrorMessage
-              message={input.errorMessage}
-              show={inputErrors[`${input.id}Error`]}
-            />
+            {attemptedSubmissionTally > 0 && (
+              <ErrorMessage
+                message={input.errorMessage}
+                show={inputErrors[`${input.id}Error`]}
+              />
+            )}
           </>
         ))}
 
@@ -75,7 +80,7 @@ export class ClassForm extends Component {
             phoneInputsParentElement={phoneInputsParentElement}
           />
         </div>
-        <input type="submit" value="Submit" />
+        <input onClick={handleSubmission} type="submit" value="Submit" />
       </form>
     );
   }

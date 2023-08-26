@@ -21,6 +21,7 @@ export class ClassApp extends React.Component {
         lastNameError: false,
         phoneError: false,
       },
+      attemptedSubmissionTally: 0,
     };
   }
 
@@ -88,6 +89,34 @@ export class ClassApp extends React.Component {
     }));
   };
 
+  handleSubmission = (e) => {
+    e.preventDefault();
+    // If no errors...
+    /* this.setState((prevState) => ({
+      userData: {
+        email: "",
+        firstName: "",
+        lastName: "",
+        phone: ["", "", "", ""],
+        city: "Hobbiton",
+      },
+      inputErrors: {
+        emailError: false,
+        firstNameError: false,
+        lastNameError: false,
+        phoneError: false,
+      },
+      attemptedSubmissionTally: 0,
+    })); */
+    // ELSE...
+    this.setState((prevState) => ({
+      ...prevState,
+      attemptedSubmissionTally: prevState.attemptedSubmissionTally + 1,
+    }));
+
+    // Reset form:
+  };
+
   render() {
     return (
       <>
@@ -102,6 +131,8 @@ export class ClassApp extends React.Component {
           resetErrors={this.resetErrors}
           handlePhoneInput={this.handlePhoneInput}
           phoneInputsParentElement={this.phoneInputsParentElement}
+          attemptedSubmissionTally={this.state.attemptedSubmissionTally}
+          handleSubmission={this.handleSubmission}
         />
       </>
     );
