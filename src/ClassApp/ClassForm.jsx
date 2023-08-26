@@ -1,9 +1,6 @@
 import { Component } from "react";
-import { ErrorMessage } from "../ErrorMessage";
 import ClassTextInput from "./ClassTextInput";
-import { similarInputs } from "../../constants";
 import { allCities } from "../utils/all-cities";
-import { isNameValid, isEmailValid } from "../utils/validations";
 import ClassPhoneInput from "./ClassPhoneInput";
 
 export class ClassForm extends Component {
@@ -24,39 +21,14 @@ export class ClassForm extends Component {
         <u>
           <h3>User Information Form</h3>
         </u>
-        {similarInputs.map((input) => (
-          <>
-            <ClassTextInput
-              input={input}
-              //value={userData[`${input.id}`]}
-              onChange={(e) => {
-                handleChange(e, input.id);
-                // if input fails its validation, then set input's error; if it passes, reset its error
-                // seems I need to base what is passed into 'show' on input's individual error state; individualization of this failed otherwise
-                // Maybe put following if/else if logic inside a method (maybe handleChange) so that it can be called as long as attemptedSubmissionsTally is > 0.
-                if (input.id.includes("Name")) {
-                  if (!isNameValid(e.target.value)) {
-                    setErrors(input.id);
-                  } else {
-                    resetErrors(input.id);
-                  }
-                } else if (input.id.includes("email")) {
-                  if (!isEmailValid(e.target.value)) {
-                    setErrors(input.id);
-                  } else {
-                    resetErrors(input.id);
-                  }
-                }
-              }}
-            />
-            {attemptedSubmissionTally > 0 && (
-              <ErrorMessage
-                message={input.errorMessage}
-                show={inputErrors[`${input.id}Error`]}
-              />
-            )}
-          </>
-        ))}
+        <ClassTextInput
+          inputErrors={inputErrors}
+          attemptedSubmissionTally={attemptedSubmissionTally}
+          handleChange={handleChange}
+          userData={userData}
+          setErrors={setErrors}
+          resetErrors={resetErrors}
+        />
 
         <div className="input-wrap">
           <label htmlFor="city">City:</label>
@@ -72,6 +44,7 @@ export class ClassForm extends Component {
             ))}
           </select>
         </div>
+
         <div className="input-wrap">
           <label htmlFor="phone">Phone:</label>
           <ClassPhoneInput
@@ -80,6 +53,7 @@ export class ClassForm extends Component {
             phoneInputsParentElement={phoneInputsParentElement}
           />
         </div>
+
         <input onClick={handleSubmission} type="submit" value="Submit" />
       </form>
     );
