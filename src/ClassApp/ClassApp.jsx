@@ -60,6 +60,10 @@ export class ClassApp extends React.Component {
         phoneInputDOMElements[
           phoneInputDOMElements.indexOf(e.target) + 1
         ]?.focus();
+      } else if (value === "") {
+        phoneInputDOMElements[
+          phoneInputDOMElements.indexOf(e.target) - 1
+        ]?.focus();
       }
     }
   };
