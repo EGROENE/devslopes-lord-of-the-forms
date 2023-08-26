@@ -1,5 +1,5 @@
 import React from "react";
-import { similarInputs } from "../../constants";
+import { textInputs } from "../../constants";
 import { isNameValid, isEmailValid } from "../utils/validations";
 import { ErrorMessage } from "../ErrorMessage";
 
@@ -15,7 +15,7 @@ class ClassTextInput extends React.Component {
     } = this.props;
     return (
       <>
-        {similarInputs.map((input) => (
+        {textInputs.map((input) => (
           <>
             <div key={input.id} className="input-wrap">
               <label>{input.label}</label>
