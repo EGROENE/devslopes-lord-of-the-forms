@@ -21,6 +21,8 @@ export class ClassForm extends Component {
         <u>
           <h3>User Information Form</h3>
         </u>
+
+        {/* Text inputs (first/last names, email) */}
         <ClassTextInput
           inputErrors={inputErrors}
           attemptedSubmissionTally={attemptedSubmissionTally}
@@ -30,6 +32,7 @@ export class ClassForm extends Component {
           resetErrors={resetErrors}
         />
 
+        {/* Dropdown input for city */}
         <div className="input-wrap">
           <label htmlFor="city">City:</label>
           <select
@@ -45,6 +48,7 @@ export class ClassForm extends Component {
           </select>
         </div>
 
+        {/* Phone inputs */}
         <div className="input-wrap">
           <label htmlFor="phone">Phone:</label>
           <ClassPhoneInput

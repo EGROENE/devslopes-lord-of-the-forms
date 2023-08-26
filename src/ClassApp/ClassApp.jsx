@@ -25,7 +25,7 @@ export class ClassApp extends React.Component {
     };
   }
 
-  // Method to update state value of input:
+  // Method to update state value onChange of text, select inputs
   handleChange = (e, inputType) => {
     const value = e.target.value;
     this.setState((prevState) => ({
@@ -37,14 +37,17 @@ export class ClassApp extends React.Component {
     }));
   };
 
+  // Run onChange of phone inputs
   handlePhoneInput = (index) => (e) => {
     const value = e.target.value;
+    // If input value contains only digits (not empty string in this case), set index (that corresponds w/ field's index of its parent in the DOM) of phone array in state; else, leave index of phone array in state as it is.
     if (containsOnlyDigits(value)) {
       const newPhoneState = this.state.userData.phone.map(
         (phoneInput, phoneInputIndex) =>
           index === phoneInputIndex ? value : phoneInput
       );
 
+      // Set phone array in state to updated state array
       this.setState((prevState) => ({
         ...prevState,
         userData: {
@@ -53,6 +56,7 @@ export class ClassApp extends React.Component {
         },
       }));
 
+      // Logic to autoskip back & forth b/t phone-input fields:
       const phoneInputDOMElements = Array.from(
         this.phoneInputsParentElement.current.children
       );
