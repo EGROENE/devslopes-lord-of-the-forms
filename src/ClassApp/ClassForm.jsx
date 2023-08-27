@@ -41,7 +41,7 @@ export class ClassForm extends Component {
             onChange={(e) => handleChange(e, "city")}
           >
             {allCities.map((city) => (
-              <option key={city} selected={city === "Hobbiton"}>
+              <option key={city} selected={city === userData.city}>
                 {city}
               </option>
             ))}
