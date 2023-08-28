@@ -135,6 +135,7 @@ export class ClassApp extends React.Component {
       }));
     } else {
       // ELSE...
+      alert("Please fix errors before submitting.");
       this.setState((prevState) => ({
         ...prevState,
         attemptedSubmissionTally: prevState.attemptedSubmissionTally + 1,
