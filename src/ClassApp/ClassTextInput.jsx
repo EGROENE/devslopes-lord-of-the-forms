@@ -16,8 +16,8 @@ class ClassTextInput extends React.Component {
     return (
       <>
         {textInputs.map((input) => (
-          <>
-            <div key={input.id} className="input-wrap">
+          <div key={input.id}>
+            <div className="input-wrap">
               <label>{input.label}</label>
               <input
                 type="text"
@@ -50,7 +50,7 @@ class ClassTextInput extends React.Component {
                 show={inputErrors[`${input.id}Error`]}
               />
             )}
-          </>
+          </div>
         ))}
       </>
     );
