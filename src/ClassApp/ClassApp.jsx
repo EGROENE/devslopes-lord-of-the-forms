@@ -155,7 +155,6 @@ export class ClassApp extends React.Component {
           userData={this.state.userData}
           inputErrors={this.state.inputErrors}
           handleChange={this.handleChange}
-          isNameValid={this.isNameValid}
           setErrors={this.setErrors}
           resetErrors={this.resetErrors}
           handlePhoneInput={this.handlePhoneInput}
