@@ -22,6 +22,7 @@ export class ClassApp extends React.Component {
         phoneError: false,
       },
       attemptedSubmissionTally: 0,
+      successfulSubmissionTally: 0,
     };
   }
 
@@ -100,7 +101,7 @@ export class ClassApp extends React.Component {
     );
     // If no errors...
     if (areNoErrors) {
-      this.setState({
+      this.setState((prevState) => ({
         userData: {
           email: "",
           firstName: "",
@@ -115,7 +116,15 @@ export class ClassApp extends React.Component {
           phoneError: false,
         },
         attemptedSubmissionTally: 0,
-      });
+        successfulSubmissionTally: prevState.successfulSubmissionTally + 1,
+        prevUserData: {
+          email: prevState.userData.email,
+          firstName: prevState.userData.firstName,
+          lastName: prevState.userData.lastName,
+          phone: prevState.userData.phone,
+          city: prevState.userData.city,
+        },
+      }));
     } else {
       // ELSE...
       this.setState((prevState) => ({
@@ -129,7 +138,10 @@ export class ClassApp extends React.Component {
     return (
       <>
         <h2>Class</h2>
-        <ProfileInformation userData={this.state.userData} />
+        <ProfileInformation
+          successfulSubmissionTally={this.state.successfulSubmissionTally}
+          prevUserData={this.state.prevUserData}
+        />
         <ClassForm
           userData={this.state.userData}
           inputErrors={this.state.inputErrors}
