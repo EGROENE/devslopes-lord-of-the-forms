@@ -24,6 +24,11 @@
   background-image: url(./assets/paper-background.jpeg);
   background-repeat: repeat;
 }
+
+select {
+  font-family: 'RingBearer';
+}
+
 h4 {
   font-family: Caligraf;
   font-size: 20;
