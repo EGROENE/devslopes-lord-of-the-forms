@@ -6,7 +6,17 @@ const emailErrorMessage = "Email is Invalid";
 const cityErrorMessage = "State is Invalid";
 const phoneNumberErrorMessage = "Invalid Phone Number";
 
-export const FunctionalForm = () => {
+export const FunctionalForm = ({
+  userData,
+  inputErrors,
+  handleChange,
+  attemptedSubmissionTally,
+  handleSubmission,
+  setErrors,
+  resetErrors,
+  handlePhoneInput,
+  phoneInputsParentElement,
+}) => {
   return (
     <form>
       <u>
