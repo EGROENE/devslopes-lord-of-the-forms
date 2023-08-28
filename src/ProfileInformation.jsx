@@ -25,8 +25,6 @@ export const ProfileInformation = ({
     }
   };
   if (successfulSubmissionTally > 0) {
-    // eslint-disable-next-line no-unused-vars
-    //const { email, firstName, lastName, phone, city } = userData;
     return (
       <>
         <u>
@@ -40,11 +38,6 @@ export const ProfileInformation = ({
               value={setProfileInfoValue(info.id)}
             />
           ))}
-          {/* {<InfoRow label="Email" value={userData.email} />
-            <InfoRow label="First Name" value={userData.firstName} />
-            <InfoRow label="Last Name" value={userData.lastName} />
-            <InfoRow label="City" value={userData.city} />
-            <InfoRow label="Phone" value={"12-34-56-7"} />} */}
         </div>
       </>
     );
