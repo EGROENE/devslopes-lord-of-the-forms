@@ -50,3 +50,11 @@ export const phoneInputs = [
     maxLength: 1,
   },
 ];
+
+export const profileInfos = [
+  { label: "Email", id: "email" },
+  { label: "First Name", id: "firstName" },
+  { label: "Last Name", id: "lastName" },
+  { label: "City", id: "city" },
+  { label: "Phone", id: "phone" },
+];
