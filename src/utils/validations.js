@@ -1,9 +1,10 @@
 export const isNameValid = (value) => {
   if (
-    value
-      .split("")
-      .every((char) => char.toLowerCase() !== char.toUpperCase()) &&
-    value.length >= 2
+    /^[a-zA-ZÄäÖöÜüßÉéÍíóÓÑñ -.]*$/i.test(value) &&
+    value.replace(/\s/g, "").length >= 2 &&
+    value.replace(/-/g, "").length &&
+    value.replace(/'/g, "").length &&
+    value.replace(/\./g, "").length
   ) {
     return true;
   } else {
