@@ -16,10 +16,10 @@ export class ClassApp extends React.Component {
         city: "Hobbiton",
       },
       inputErrors: {
-        emailError: false,
-        firstNameError: false,
-        lastNameError: false,
-        phoneError: false,
+        emailError: true,
+        firstNameError: true,
+        lastNameError: true,
+        phoneError: true,
       },
       attemptedSubmissionTally: 0,
       successfulSubmissionTally: 0,
@@ -56,6 +56,13 @@ export class ClassApp extends React.Component {
           phone: newPhoneState,
         },
       }));
+
+      // If length of string containing only the digits in userData.phone is not equal to 6 (account for delay in setting of state above), set inputErrors.phone to true; else, to false:
+      if (this.state.userData.phone.toString().replace(/,/g, "").length !== 6) {
+        this.setErrors("phone");
+      } else {
+        this.resetErrors("phone");
+      }
 
       // Logic to autoskip back & forth b/t phone-input fields:
       const phoneInputDOMElements = Array.from(
@@ -96,6 +103,7 @@ export class ClassApp extends React.Component {
 
   handleSubmission = (e) => {
     e.preventDefault();
+
     const areNoErrors = Object.values(this.state.inputErrors).every(
       (value) => value === false
     );
