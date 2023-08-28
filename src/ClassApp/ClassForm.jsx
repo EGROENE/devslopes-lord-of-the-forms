@@ -2,6 +2,7 @@ import { Component } from "react";
 import ClassTextInput from "./ClassTextInput";
 import { allCities } from "../utils/all-cities";
 import ClassPhoneInput from "./ClassPhoneInput";
+import { ErrorMessage } from "../ErrorMessage";
 
 export class ClassForm extends Component {
   render() {
@@ -52,11 +53,19 @@ export class ClassForm extends Component {
         <div className="input-wrap">
           <label htmlFor="phone">Phone:</label>
           <ClassPhoneInput
+            inputErrors={inputErrors}
+            attemptedSubmissionTally={attemptedSubmissionTally}
             handlePhoneInput={handlePhoneInput}
             userData={userData}
             phoneInputsParentElement={phoneInputsParentElement}
           />
         </div>
+        {attemptedSubmissionTally > 0 && (
+          <ErrorMessage
+            message="Invalid Phone Number"
+            show={inputErrors.phoneError}
+          />
+        )}
 
         <input onClick={handleSubmission} type="submit" value="Submit" />
       </form>
