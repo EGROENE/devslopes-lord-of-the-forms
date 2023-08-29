@@ -21,10 +21,9 @@ export const FunctionalApp = () => {
   });
   const [inputErrors, setInputErrors] = useState({
     emailError: true,
-    firstName: true,
+    firstNameError: true,
     lastNameError: true,
     phoneError: true,
-    cityError: true,
   });
   const [attemptedSubmissionTally, setAttemptedSubmissionTally] = useState(0);
   const [successfulSubmissionTally, setSuccessfulSubmissionTally] = useState(0);
@@ -58,7 +57,7 @@ export const FunctionalApp = () => {
 
       // Logic to autoskip back & forth b/t phone-input fields:
       const phoneInputDOMElements = Array.from(
-        phoneInputsParentElement.children
+        phoneInputsParentElement.current.children
       );
 
       if (value.length === e.target.maxLength) {
@@ -75,13 +74,13 @@ export const FunctionalApp = () => {
 
   const setErrors = (inputType) => {
     setInputErrors((prevState) => {
-      return { ...prevState, [`${inputType}`]: true };
+      return { ...prevState, [`${inputType}Error`]: true };
     });
   };
 
   const resetErrors = (inputType) => {
     setInputErrors((prevState) => {
-      return { ...prevState, [`${inputType}`]: false };
+      return { ...prevState, [`${inputType}Error`]: false };
     });
   };
 
@@ -93,6 +92,13 @@ export const FunctionalApp = () => {
     );
     // If no errors...
     if (areNoErrors) {
+      setPrevUserData({
+        email: userData.email,
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        phone: userData.phone,
+        city: userData.city,
+      });
       setUserData({
         email: "",
         firstName: "",
@@ -105,16 +111,6 @@ export const FunctionalApp = () => {
         firstNameError: true,
         lastNameError: true,
         phoneError: true,
-      });
-      // if prevState.userData is undefined, try setting these to current userData values before resetting in setUserData above
-      setPrevUserData((prevState) => {
-        return {
-          email: prevState.userData.email,
-          firstName: prevState.userData.firstName,
-          lastName: prevState.userData.lastName,
-          phone: prevState.userData.phone,
-          city: prevState.userData.city,
-        };
       });
       setAttemptedSubmissionTally(0);
       setSuccessfulSubmissionTally(successfulSubmissionTally + 1);
