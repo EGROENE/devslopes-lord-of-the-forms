@@ -35,7 +35,7 @@ export const ProfileInformation = ({
             <InfoRow
               key={info.id}
               label={info.label}
-              value={setProfileInfoValue(info.id)}
+              value={setProfileInfoValue(info.id).trim()}
             />
           ))}
         </div>
