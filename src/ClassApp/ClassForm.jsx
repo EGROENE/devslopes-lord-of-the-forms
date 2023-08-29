@@ -18,7 +18,7 @@ export class ClassForm extends Component {
       handleSubmission,
     } = this.props;
     return (
-      <form>
+      <form onSubmit={handleSubmission}>
         <u>
           <h3>User Information Form</h3>
         </u>
@@ -67,7 +67,7 @@ export class ClassForm extends Component {
           />
         )}
 
-        <input onClick={handleSubmission} type="submit" value="Submit" />
+        <input type="submit" value="Submit" />
       </form>
     );
   }
