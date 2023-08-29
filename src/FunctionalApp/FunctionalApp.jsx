@@ -5,30 +5,29 @@ import { containsOnlyDigits } from "../utils/validations";
 
 export const FunctionalApp = () => {
   const phoneInputsParentElement = useRef(0);
-  const { userData, setUserData } = useState({
+  const [userData, setUserData] = useState({
     email: "",
     firstName: "",
     lastName: "",
     phone: ["", "", "", ""],
     city: "Hobbiton",
   });
-  const { prevUserData, setPrevUserData } = useState({
+  const [prevUserData, setPrevUserData] = useState({
     email: "",
     firstName: "",
     lastName: "",
     phone: "",
     city: "",
   });
-  const { inputErrors, setInputErrors } = useState({
+  const [inputErrors, setInputErrors] = useState({
     emailError: true,
     firstName: true,
     lastNameError: true,
     phoneError: true,
     cityError: true,
   });
-  const { attemptedSubmissionTally, setAttemptedSubmissionTally } = useState(0);
-  const { successfulSubmissionTally, setSuccessfulSubmissionTally } =
-    useState(0);
+  const [attemptedSubmissionTally, setAttemptedSubmissionTally] = useState(0);
+  const [successfulSubmissionTally, setSuccessfulSubmissionTally] = useState(0);
 
   // Method to update state value onChange of text, select inputs
   const handleChange = (e, inputType) => {
