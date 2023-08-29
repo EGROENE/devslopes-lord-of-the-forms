@@ -53,8 +53,6 @@ export class ClassForm extends Component {
         <div className="input-wrap">
           <label htmlFor="phone">Phone:</label>
           <ClassPhoneInput
-            inputErrors={inputErrors}
-            attemptedSubmissionTally={attemptedSubmissionTally}
             handlePhoneInput={handlePhoneInput}
             userData={userData}
             phoneInputsParentElement={phoneInputsParentElement}
