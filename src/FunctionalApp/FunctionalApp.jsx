@@ -116,7 +116,7 @@ export const FunctionalApp = () => {
       setSuccessfulSubmissionTally(successfulSubmissionTally + 1);
     } else {
       // ELSE...
-      alert("Please fix errors before submitting.");
+      alert("Bad inputs.");
       setAttemptedSubmissionTally(attemptedSubmissionTally + 1);
     }
   };
