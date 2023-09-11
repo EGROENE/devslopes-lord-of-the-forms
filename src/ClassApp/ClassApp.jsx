@@ -22,7 +22,7 @@ export class ClassApp extends React.Component {
         phoneError: true,
       },
       attemptedSubmissionTally: 0,
-      hasFormBeenSubmittedAtLeastOnce: 0,
+      hasFormBeenSubmittedAtLeastOnce: false,
     };
   }
 
@@ -124,8 +124,7 @@ export class ClassApp extends React.Component {
           phoneError: true,
         },
         attemptedSubmissionTally: 0,
-        hasFormBeenSubmittedAtLeastOnce:
-          prevState.hasFormBeenSubmittedAtLeastOnce + 1,
+        hasFormBeenSubmittedAtLeastOnce: true,
         prevUserData: {
           email: prevState.userData.email,
           firstName: prevState.userData.firstName,
