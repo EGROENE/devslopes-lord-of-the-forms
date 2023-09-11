@@ -10,7 +10,7 @@ class ClassTextInput extends React.Component {
       handleChange,
       setErrors,
       resetErrors,
-      attemptedSubmissionTally,
+      hasFailedSubmission,
       inputErrors,
     } = this.props;
     return (
@@ -44,7 +44,7 @@ class ClassTextInput extends React.Component {
                 }}
               />
             </div>
-            {attemptedSubmissionTally > 0 && (
+            {hasFailedSubmission && (
               <ErrorMessage
                 message={input.errorMessage}
                 show={inputErrors[`${input.id}Error`]}

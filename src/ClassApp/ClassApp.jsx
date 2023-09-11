@@ -21,7 +21,7 @@ export class ClassApp extends React.Component {
         lastNameError: true,
         phoneError: true,
       },
-      attemptedSubmissionTally: 0,
+      hasFailedSubmission: false,
       hasFormBeenSubmittedAtLeastOnce: false,
     };
   }
@@ -123,7 +123,7 @@ export class ClassApp extends React.Component {
           lastNameError: true,
           phoneError: true,
         },
-        attemptedSubmissionTally: 0,
+        hasFailedSubmission: false,
         hasFormBeenSubmittedAtLeastOnce: true,
         prevUserData: {
           email: prevState.userData.email,
@@ -138,7 +138,7 @@ export class ClassApp extends React.Component {
       alert("Bad inputs.");
       this.setState((prevState) => ({
         ...prevState,
-        attemptedSubmissionTally: prevState.attemptedSubmissionTally + 1,
+        hasFailedSubmission: true,
       }));
     }
   };
@@ -161,7 +161,7 @@ export class ClassApp extends React.Component {
           resetErrors={this.resetErrors}
           handlePhoneInput={this.handlePhoneInput}
           phoneInputsParentElement={this.phoneInputsParentElement}
-          attemptedSubmissionTally={this.state.attemptedSubmissionTally}
+          hasFailedSubmission={this.state.hasFailedSubmission}
           handleSubmission={this.handleSubmission}
         />
       </>

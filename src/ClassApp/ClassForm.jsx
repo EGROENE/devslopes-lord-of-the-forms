@@ -14,7 +14,7 @@ export class ClassForm extends Component {
       resetErrors,
       handlePhoneInput,
       phoneInputsParentElement,
-      attemptedSubmissionTally,
+      hasFailedSubmission,
       handleSubmission,
     } = this.props;
     return (
@@ -26,7 +26,7 @@ export class ClassForm extends Component {
         {/* Text inputs (first/last names, email) */}
         <ClassTextInput
           inputErrors={inputErrors}
-          attemptedSubmissionTally={attemptedSubmissionTally}
+          hasFailedSubmission={hasFailedSubmission}
           handleChange={handleChange}
           userData={userData}
           setErrors={setErrors}
@@ -58,7 +58,7 @@ export class ClassForm extends Component {
             phoneInputsParentElement={phoneInputsParentElement}
           />
         </div>
-        {attemptedSubmissionTally > 0 && (
+        {hasFailedSubmission && (
           <ErrorMessage
             message="Invalid Phone Number"
             show={inputErrors.phoneError}

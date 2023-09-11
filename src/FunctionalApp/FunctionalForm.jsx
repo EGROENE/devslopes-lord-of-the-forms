@@ -6,9 +6,10 @@ import { FunctionalPhoneInput } from "./FunctionalPhoneInput";
 import { containsOnlyDigits } from "../utils/validations";
 
 export const FunctionalForm = ({
-  attemptedSubmissionTally,
-  setAttemptedSubmissionTally,
+  hasFailedSubmission,
+  setHasFailedSubmission,
   setPrevUserData,
+  hasFormBeenSubmittedAtLeastOnce,
   setHasFormBeenSubmittedAtLeastOnce,
 }) => {
   const phoneInputsParentElement = useRef(0);
@@ -114,12 +115,14 @@ export const FunctionalForm = ({
         lastNameError: true,
         phoneError: true,
       });
-      setAttemptedSubmissionTally(0);
-      setHasFormBeenSubmittedAtLeastOnce(true);
+      setHasFailedSubmission(false);
+      if (!hasFormBeenSubmittedAtLeastOnce) {
+        setHasFormBeenSubmittedAtLeastOnce(true);
+      }
     } else {
       // ELSE...
       alert("Bad inputs.");
-      setAttemptedSubmissionTally(attemptedSubmissionTally + 1);
+      setHasFailedSubmission(true);
     }
   };
   return (
@@ -133,7 +136,7 @@ export const FunctionalForm = ({
         handleChange={handleChange}
         setErrors={setErrors}
         resetErrors={resetErrors}
-        attemptedSubmissionTally={attemptedSubmissionTally}
+        hasFailedSubmission={hasFailedSubmission}
         inputErrors={inputErrors}
         userData={userData}
       />
@@ -159,7 +162,7 @@ export const FunctionalForm = ({
           handlePhoneInput={handlePhoneInput}
         />
       </div>
-      {attemptedSubmissionTally > 0 && (
+      {hasFailedSubmission && (
         <ErrorMessage
           message="Invalid Phone Number"
           show={inputErrors.phoneError}

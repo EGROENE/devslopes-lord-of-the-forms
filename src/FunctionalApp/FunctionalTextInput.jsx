@@ -6,7 +6,7 @@ export const FunctionalTextInput = ({
   handleChange,
   setErrors,
   resetErrors,
-  attemptedSubmissionTally,
+  hasFailedSubmission,
   inputErrors,
   userData,
 }) => {
@@ -41,7 +41,7 @@ export const FunctionalTextInput = ({
               }}
             />
           </div>
-          {attemptedSubmissionTally > 0 && (
+          {hasFailedSubmission && (
             <ErrorMessage
               message={input.errorMessage}
               show={inputErrors[`${input.id}Error`]}
