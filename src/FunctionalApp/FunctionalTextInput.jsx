@@ -4,7 +4,7 @@ import { ErrorMessage } from "../ErrorMessage";
 import { allCities } from "../utils/all-cities";
 
 export const FunctionalTextInput = ({
-  handleChange,
+  handleTextInputChange,
   setErrors,
   resetErrors,
   hasFailedSubmission,
@@ -23,7 +23,7 @@ export const FunctionalTextInput = ({
               value={userData[`${input.id}`]}
               list={input.list ? input.list : undefined}
               onChange={(e) => {
-                handleChange(e, input.id);
+                handleTextInputChange(e, input.id);
                 if (input.id === "firstName" || input.id === "lastName") {
                   if (!isNameValid(e.target.value)) {
                     setErrors(input.id);

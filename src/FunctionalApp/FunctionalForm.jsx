@@ -27,16 +27,15 @@ export const FunctionalForm = ({
     phoneError: true,
     cityError: true,
   });
-  // Method to update state value onChange of text, select inputs
-  // Put in FunctionalForm.jsx:
-  const handleChange = (e, inputType) => {
+  // Call onChange of all fields except phone inputs:
+  const handleTextInputChange = (e, inputType) => {
     const value = e.target.value;
     setUserData((prevState) => {
       return { ...prevState, [`${inputType}`]: value };
     });
   };
 
-  // Put in FunctionalForm.jsx:
+  // Call onChange of phone inputs:
   const handlePhoneInput = (index) => (e) => {
     const value = e.target.value;
     if (containsOnlyDigits(value)) {
@@ -134,7 +133,7 @@ export const FunctionalForm = ({
 
       {/* Text inputs (first/last names, email) */}
       <FunctionalTextInput
-        handleChange={handleChange}
+        handleTextInputChange={handleTextInputChange}
         setErrors={setErrors}
         resetErrors={resetErrors}
         hasFailedSubmission={hasFailedSubmission}

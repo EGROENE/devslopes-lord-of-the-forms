@@ -26,8 +26,8 @@ export class ClassApp extends React.Component {
     };
   }
 
-  // Method to update state value onChange of text, select inputs
-  handleChange = (e, inputType) => {
+  // Call onChange of all fields except phone inputs:
+  handleTextInputChange = (e, inputType) => {
     const value = e.target.value;
     this.setState((prevState) => ({
       ...prevState,
@@ -38,7 +38,7 @@ export class ClassApp extends React.Component {
     }));
   };
 
-  // Run onChange of phone inputs
+  // Call onChange of phone inputs:
   handlePhoneInput = (index) => (e) => {
     const value = e.target.value;
     // If input value contains only digits (not empty string in this case), set index (that corresponds w/ field's index of its parent in the DOM) of phone array in state; else, leave index of phone array in state as it is.
@@ -156,7 +156,7 @@ export class ClassApp extends React.Component {
         <ClassForm
           userData={this.state.userData}
           inputErrors={this.state.inputErrors}
-          handleChange={this.handleChange}
+          handleTextInputChange={this.handleTextInputChange}
           setErrors={this.setErrors}
           resetErrors={this.resetErrors}
           handlePhoneInput={this.handlePhoneInput}

@@ -8,7 +8,7 @@ class ClassTextInput extends React.Component {
   render() {
     const {
       userData,
-      handleChange,
+      handleTextInputChange,
       setErrors,
       resetErrors,
       hasFailedSubmission,
@@ -26,7 +26,7 @@ class ClassTextInput extends React.Component {
                 value={userData[`${input.id}`]}
                 list={input.list ? input.list : undefined}
                 onChange={(e) => {
-                  handleChange(e, input.id);
+                  handleTextInputChange(e, input.id);
                   if (input.id === "firstName" || input.id === "lastName") {
                     if (!isNameValid(e.target.value)) {
                       setErrors(input.id);
