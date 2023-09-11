@@ -22,7 +22,7 @@ export class ClassApp extends React.Component {
         phoneError: true,
       },
       attemptedSubmissionTally: 0,
-      successfulSubmissionTally: 0,
+      hasFormBeenSubmittedAtLeastOnce: 0,
     };
   }
 
@@ -124,7 +124,8 @@ export class ClassApp extends React.Component {
           phoneError: true,
         },
         attemptedSubmissionTally: 0,
-        successfulSubmissionTally: prevState.successfulSubmissionTally + 1,
+        hasFormBeenSubmittedAtLeastOnce:
+          prevState.hasFormBeenSubmittedAtLeastOnce + 1,
         prevUserData: {
           email: prevState.userData.email,
           firstName: prevState.userData.firstName,
@@ -148,7 +149,9 @@ export class ClassApp extends React.Component {
       <>
         <h2>Class</h2>
         <ProfileInformation
-          successfulSubmissionTally={this.state.successfulSubmissionTally}
+          hasFormBeenSubmittedAtLeastOnce={
+            this.state.hasFormBeenSubmittedAtLeastOnce
+          }
           prevUserData={this.state.prevUserData}
         />
         <ClassForm

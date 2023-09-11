@@ -11,14 +11,15 @@ export const FunctionalApp = () => {
     city: "",
   });
   const [attemptedSubmissionTally, setAttemptedSubmissionTally] = useState(0);
-  const [successfulSubmissionTally, setSuccessfulSubmissionTally] = useState(0);
+  const [hasFormBeenSubmittedAtLeastOnce, setHasFormBeenSubmittedAtLeastOnce] =
+    useState(false);
 
   return (
     <>
       <h2>Functional</h2>
       <ProfileInformation
-        successfulSubmissionTally={successfulSubmissionTally}
-        setAttemptedSubmissionTally={setSuccessfulSubmissionTally}
+        hasFormBeenSubmittedAtLeastOnce={hasFormBeenSubmittedAtLeastOnce}
+        setAttemptedSubmissionTally={setHasFormBeenSubmittedAtLeastOnce}
         prevUserData={prevUserData}
         setPrevUserData={setPrevUserData}
       />
@@ -26,8 +27,8 @@ export const FunctionalApp = () => {
         attemptedSubmissionTally={attemptedSubmissionTally}
         setAttemptedSubmissionTally={setAttemptedSubmissionTally}
         setPrevUserData={setPrevUserData}
-        successfulSubmissionTally={successfulSubmissionTally}
-        setSuccessfulSubmissionTally={setSuccessfulSubmissionTally}
+        hasFormBeenSubmittedAtLeastOnce={hasFormBeenSubmittedAtLeastOnce}
+        setHasFormBeenSubmittedAtLeastOnce={setHasFormBeenSubmittedAtLeastOnce}
       />
     </>
   );

@@ -13,7 +13,7 @@ export const InfoRow = ({ label, value }) => {
 };
 export const ProfileInformation = ({
   prevUserData,
-  successfulSubmissionTally,
+  hasFormBeenSubmittedAtLeastOnce,
 }) => {
   const setProfileInfoValue = (id) => {
     if (id.includes("Name")) {
@@ -24,7 +24,7 @@ export const ProfileInformation = ({
       return prevUserData[`${id}`];
     }
   };
-  if (successfulSubmissionTally > 0) {
+  if (hasFormBeenSubmittedAtLeastOnce) {
     return (
       <>
         <u>

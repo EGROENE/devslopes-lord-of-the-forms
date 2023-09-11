@@ -9,8 +9,7 @@ export const FunctionalForm = ({
   attemptedSubmissionTally,
   setAttemptedSubmissionTally,
   setPrevUserData,
-  successfulSubmissionTally,
-  setSuccessfulSubmissionTally,
+  setHasFormBeenSubmittedAtLeastOnce,
 }) => {
   const phoneInputsParentElement = useRef(0);
   const [userData, setUserData] = useState({
@@ -116,7 +115,7 @@ export const FunctionalForm = ({
         phoneError: true,
       });
       setAttemptedSubmissionTally(0);
-      setSuccessfulSubmissionTally(successfulSubmissionTally + 1);
+      setHasFormBeenSubmittedAtLeastOnce(true);
     } else {
       // ELSE...
       alert("Bad inputs.");
