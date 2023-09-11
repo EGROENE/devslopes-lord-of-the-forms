@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { ErrorMessage } from "../ErrorMessage";
 import { FunctionalTextInput } from "./FunctionalTextInput";
-import { allCities } from "../utils/all-cities";
+//import { allCities } from "../utils/all-cities";
 import { FunctionalPhoneInput } from "./FunctionalPhoneInput";
 import { containsOnlyDigits } from "../utils/validations";
 
@@ -18,13 +18,14 @@ export const FunctionalForm = ({
     firstName: "",
     lastName: "",
     phone: ["", "", "", ""],
-    city: "Hobbiton",
+    city: "",
   });
   const [inputErrors, setInputErrors] = useState({
     emailError: true,
     firstNameError: true,
     lastNameError: true,
     phoneError: true,
+    cityError: true,
   });
   // Method to update state value onChange of text, select inputs
   // Put in FunctionalForm.jsx:
@@ -107,7 +108,7 @@ export const FunctionalForm = ({
         firstName: "",
         lastName: "",
         phone: ["", "", "", ""],
-        city: "Hobbiton",
+        city: "",
       });
       setInputErrors({
         emailError: true,
@@ -140,18 +141,6 @@ export const FunctionalForm = ({
         inputErrors={inputErrors}
         userData={userData}
       />
-
-      {/* City Input */}
-      <div className="input-wrap">
-        <label htmlFor="city">City:</label>
-        <select name="city" id="city" onChange={(e) => handleChange(e, "city")}>
-          {allCities.map((city) => (
-            <option key={city} selected={city === userData.city}>
-              {city}
-            </option>
-          ))}
-        </select>
-      </div>
 
       {/* Phone inputs */}
       <div className="input-wrap">

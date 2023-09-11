@@ -1,6 +1,5 @@
 import { Component } from "react";
 import ClassTextInput from "./ClassTextInput";
-import { allCities } from "../utils/all-cities";
 import ClassPhoneInput from "./ClassPhoneInput";
 import { ErrorMessage } from "../ErrorMessage";
 
@@ -32,22 +31,6 @@ export class ClassForm extends Component {
           setErrors={setErrors}
           resetErrors={resetErrors}
         />
-
-        {/* Dropdown input for city */}
-        <div className="input-wrap">
-          <label htmlFor="city">City:</label>
-          <select
-            name="city"
-            id="city"
-            onChange={(e) => handleChange(e, "city")}
-          >
-            {allCities.map((city) => (
-              <option key={city} selected={city === userData.city}>
-                {city}
-              </option>
-            ))}
-          </select>
-        </div>
 
         {/* Phone inputs */}
         <div className="input-wrap">

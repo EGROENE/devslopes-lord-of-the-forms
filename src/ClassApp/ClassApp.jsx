@@ -13,7 +13,7 @@ export class ClassApp extends React.Component {
         firstName: "",
         lastName: "",
         phone: ["", "", "", ""],
-        city: "Hobbiton",
+        city: "",
       },
       inputErrors: {
         emailError: true,
@@ -115,7 +115,7 @@ export class ClassApp extends React.Component {
           firstName: "",
           lastName: "",
           phone: ["", "", "", ""],
-          city: "Hobbiton",
+          city: "",
         },
         inputErrors: {
           emailError: true,

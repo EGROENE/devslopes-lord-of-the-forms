@@ -18,6 +18,13 @@ export const textInputs = [
     placeholder: "bilbo-baggins@adventurehobbits.net",
     errorMessage: "Email is Invalid",
   },
+  {
+    id: "city",
+    label: "City",
+    placeholder: "Hobbiton",
+    errorMessage: "City is Invalid",
+    list: "cities",
+  },
 ];
 
 export const phoneInputs = [
