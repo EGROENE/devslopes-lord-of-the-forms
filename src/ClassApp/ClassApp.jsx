@@ -28,7 +28,7 @@ export class ClassApp extends React.Component {
   }
 
   // Call onChange of all fields except phone inputs:
-  handleTextInputChange = (e, inputType) => {
+  handleNonPhoneTextInput = (e, inputType) => {
     const value = e.target.value;
     this.setState((prevState) => ({
       ...prevState,
@@ -158,7 +158,7 @@ export class ClassApp extends React.Component {
         <ClassForm
           userData={this.state.userData}
           inputErrors={this.state.inputErrors}
-          handleTextInputChange={this.handleTextInputChange}
+          handleNonPhoneTextInput={this.handleNonPhoneTextInput}
           setErrors={this.setErrors}
           resetErrors={this.resetErrors}
           handlePhoneInput={this.handlePhoneInput}

@@ -8,7 +8,7 @@ export class ClassForm extends Component {
     const {
       userData,
       inputErrors,
-      handleTextInputChange,
+      handleNonPhoneTextInput,
       setErrors,
       resetErrors,
       handlePhoneInput,
@@ -26,7 +26,7 @@ export class ClassForm extends Component {
         <ClassTextInput
           inputErrors={inputErrors}
           hasFailedSubmission={hasFailedSubmission}
-          handleTextInputChange={handleTextInputChange}
+          handleNonPhoneTextInput={handleNonPhoneTextInput}
           userData={userData}
           setErrors={setErrors}
           resetErrors={resetErrors}

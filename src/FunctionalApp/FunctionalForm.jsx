@@ -29,7 +29,8 @@ export const FunctionalForm = ({
   const [hasFailedSubmission, setHasFailedSubmission] = useState(false);
 
   // Call onChange of all fields except phone inputs:
-  const handleTextInputChange = (e, inputType) => {
+  // Maybe define in FunctionalTextInput.jsx
+  const handleNonPhoneTextInput = (e, inputType) => {
     const value = e.target.value;
     setUserData((prevState) => {
       return { ...prevState, [`${inputType}`]: value };
@@ -122,7 +123,7 @@ export const FunctionalForm = ({
 
       {/* Text inputs (first/last names, email, city) */}
       <FunctionalTextInput
-        handleTextInputChange={handleTextInputChange}
+        handleNonPhoneTextInput={handleNonPhoneTextInput}
         hasFailedSubmission={hasFailedSubmission}
         inputErrors={inputErrors}
         userData={userData}

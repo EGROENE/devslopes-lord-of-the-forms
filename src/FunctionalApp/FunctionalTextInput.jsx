@@ -2,7 +2,7 @@ import { textInputs } from "../../constants";
 import { ErrorMessage } from "../ErrorMessage";
 
 export const FunctionalTextInput = ({
-  handleTextInputChange,
+  handleNonPhoneTextInput,
   hasFailedSubmission,
   inputErrors,
   userData,
@@ -19,7 +19,7 @@ export const FunctionalTextInput = ({
               value={userData[`${input.id}`]}
               list={input.list ? input.list : undefined}
               onChange={(e) => {
-                handleTextInputChange(e, input.id);
+                handleNonPhoneTextInput(e, input.id);
               }}
             />
           </div>
