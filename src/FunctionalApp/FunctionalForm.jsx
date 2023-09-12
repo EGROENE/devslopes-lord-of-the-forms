@@ -1,12 +1,8 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { ErrorMessage } from "../ErrorMessage";
 import { FunctionalTextInput } from "./FunctionalTextInput";
 import { FunctionalPhoneInput } from "./FunctionalPhoneInput";
-import {
-  containsOnlyDigits,
-  isNameValid,
-  isEmailValid,
-} from "../utils/validations";
+import { isNameValid, isEmailValid } from "../utils/validations";
 import { allCities } from "../utils/all-cities";
 
 export const FunctionalForm = ({
@@ -16,7 +12,6 @@ export const FunctionalForm = ({
   hasFormBeenSubmittedAtLeastOnce,
   setHasFormBeenSubmittedAtLeastOnce,
 }) => {
-  const phoneInputsParentElement = useRef(0);
   const [userData, setUserData] = useState({
     email: "",
     firstName: "",
@@ -59,43 +54,6 @@ export const FunctionalForm = ({
         setErrors(inputType);
       } else {
         resetErrors(inputType);
-      }
-    }
-  };
-
-  // Call onChange of phone inputs:
-  const handlePhoneInput = (index) => (e) => {
-    const value = e.target.value;
-    if (containsOnlyDigits(value)) {
-      const newPhoneState = userData.phone.map((phoneInput, phoneInputIndex) =>
-        index === phoneInputIndex ? value : phoneInput
-      );
-
-      // Set phone array in state to updated state array
-      setUserData((prevState) => {
-        return { ...prevState, phone: newPhoneState };
-      });
-
-      // If length of string containing only the digits in userData.phone is not equal to 6 (account for delay in setting of state above), set inputErrors.phone to true; else, to false:
-      if (userData.phone.toString().replace(/,/g, "").length !== 6) {
-        setErrors("phone");
-      } else {
-        resetErrors("phone");
-      }
-
-      // Logic to autoskip back & forth b/t phone-input fields:
-      const phoneInputDOMElements = Array.from(
-        phoneInputsParentElement.current.children
-      );
-
-      if (value.length === e.target.maxLength) {
-        phoneInputDOMElements[
-          phoneInputDOMElements.indexOf(e.target) + 1
-        ]?.focus();
-      } else if (value === "") {
-        phoneInputDOMElements[
-          phoneInputDOMElements.indexOf(e.target) - 1
-        ]?.focus();
       }
     }
   };
@@ -171,9 +129,10 @@ export const FunctionalForm = ({
       <div className="input-wrap">
         <label htmlFor="phone">Phone:</label>
         <FunctionalPhoneInput
-          phoneInputsParentElement={phoneInputsParentElement}
           userData={userData}
-          handlePhoneInput={handlePhoneInput}
+          setUserData={setUserData}
+          setErrors={setErrors}
+          resetErrors={resetErrors}
         />
       </div>
       {hasFailedSubmission && (
