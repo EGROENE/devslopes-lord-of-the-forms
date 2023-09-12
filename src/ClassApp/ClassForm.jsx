@@ -22,7 +22,7 @@ export class ClassForm extends Component {
           <h3>User Information Form</h3>
         </u>
 
-        {/* Text inputs (first/last names, email) */}
+        {/* Text inputs (first/last names, email, city) */}
         <ClassTextInput
           inputErrors={inputErrors}
           hasFailedSubmission={hasFailedSubmission}

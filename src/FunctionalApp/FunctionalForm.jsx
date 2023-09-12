@@ -120,7 +120,7 @@ export const FunctionalForm = ({
         <h3>User Information Form</h3>
       </u>
 
-      {/* Text inputs (first/last names, email) */}
+      {/* Text inputs (first/last names, email, city) */}
       <FunctionalTextInput
         handleTextInputChange={handleTextInputChange}
         hasFailedSubmission={hasFailedSubmission}
