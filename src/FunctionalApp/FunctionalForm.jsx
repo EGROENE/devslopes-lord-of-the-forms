@@ -2,8 +2,6 @@ import { useState } from "react";
 import { ErrorMessage } from "../ErrorMessage";
 import { FunctionalTextInput } from "./FunctionalTextInput";
 import { FunctionalPhoneInput } from "./FunctionalPhoneInput";
-import { isNameValid, isEmailValid } from "../utils/validations";
-import { allCities } from "../utils/all-cities";
 
 export const FunctionalForm = ({
   setPrevUserData,
@@ -28,54 +26,18 @@ export const FunctionalForm = ({
 
   const [hasFailedSubmission, setHasFailedSubmission] = useState(false);
 
-  // Call onChange of all fields except phone inputs:
-  // Maybe define in FunctionalTextInput.jsx
-  const handleNonPhoneTextInput = (e, inputType) => {
-    const value = e.target.value;
-    setUserData((prevState) => {
-      return { ...prevState, [`${inputType}`]: value };
-    });
-    // Set/reset errors in state, depending on the type of input this method is called on when changed:
-    if (inputType === "firstName" || inputType === "lastName") {
-      if (!isNameValid(e.target.value)) {
-        setErrors(inputType);
-      } else {
-        resetErrors(inputType);
-      }
-    } else if (inputType === "email") {
-      if (!isEmailValid(e.target.value)) {
-        setErrors(inputType);
-      } else {
-        resetErrors(inputType);
-      }
-    } else if (inputType === "city") {
-      if (
-        !allCities
-          .map((city) => city.toLowerCase())
-          .includes(e.target.value.toLowerCase())
-      ) {
-        setErrors(inputType);
-      } else {
-        resetErrors(inputType);
-      }
-    }
-  };
-
-  // Put in FunctionalForm.jsx:
   const setErrors = (inputType) => {
     setInputErrors((prevState) => {
       return { ...prevState, [`${inputType}Error`]: true };
     });
   };
 
-  // Put in FunctionalForm.jsx:
   const resetErrors = (inputType) => {
     setInputErrors((prevState) => {
       return { ...prevState, [`${inputType}Error`]: false };
     });
   };
 
-  // Put in FunctionalForm.jsx:
   const handleSubmission = (e) => {
     e.preventDefault();
 
@@ -115,6 +77,7 @@ export const FunctionalForm = ({
       setHasFailedSubmission(true);
     }
   };
+
   return (
     <form onSubmit={handleSubmission}>
       <u>
@@ -123,10 +86,12 @@ export const FunctionalForm = ({
 
       {/* Text inputs (first/last names, email, city) */}
       <FunctionalTextInput
-        handleNonPhoneTextInput={handleNonPhoneTextInput}
         hasFailedSubmission={hasFailedSubmission}
         inputErrors={inputErrors}
         userData={userData}
+        setUserData={setUserData}
+        setErrors={setErrors}
+        resetErrors={resetErrors}
       />
 
       {/* Phone inputs */}
