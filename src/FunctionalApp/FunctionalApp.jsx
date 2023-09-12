@@ -10,7 +10,8 @@ export const FunctionalApp = () => {
     phone: "",
     city: "",
   });
-  const [hasFailedSubmission, setHasFailedSubmission] = useState(false);
+
+  // Define hasFormBeenSubmittedAtLeastOnce & its setter here, since it'll be passed into multiple child components
   const [hasFormBeenSubmittedAtLeastOnce, setHasFormBeenSubmittedAtLeastOnce] =
     useState(false);
 
@@ -19,13 +20,9 @@ export const FunctionalApp = () => {
       <h2>Functional</h2>
       <ProfileInformation
         hasFormBeenSubmittedAtLeastOnce={hasFormBeenSubmittedAtLeastOnce}
-        setHasFailedSubmission={setHasFormBeenSubmittedAtLeastOnce}
         prevUserData={prevUserData}
-        setPrevUserData={setPrevUserData}
       />
       <FunctionalForm
-        hasFailedSubmission={hasFailedSubmission}
-        setHasFailedSubmission={setHasFailedSubmission}
         setPrevUserData={setPrevUserData}
         hasFormBeenSubmittedAtLeastOnce={hasFormBeenSubmittedAtLeastOnce}
         setHasFormBeenSubmittedAtLeastOnce={setHasFormBeenSubmittedAtLeastOnce}

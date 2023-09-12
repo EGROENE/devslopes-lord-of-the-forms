@@ -6,8 +6,6 @@ import { isNameValid, isEmailValid } from "../utils/validations";
 import { allCities } from "../utils/all-cities";
 
 export const FunctionalForm = ({
-  hasFailedSubmission,
-  setHasFailedSubmission,
   setPrevUserData,
   hasFormBeenSubmittedAtLeastOnce,
   setHasFormBeenSubmittedAtLeastOnce,
@@ -19,6 +17,7 @@ export const FunctionalForm = ({
     phone: ["", "", "", ""],
     city: "",
   });
+
   const [inputErrors, setInputErrors] = useState({
     emailError: true,
     firstNameError: true,
@@ -26,6 +25,9 @@ export const FunctionalForm = ({
     phoneError: true,
     cityError: true,
   });
+
+  const [hasFailedSubmission, setHasFailedSubmission] = useState(false);
+
   // Call onChange of all fields except phone inputs:
   const handleTextInputChange = (e, inputType) => {
     const value = e.target.value;
