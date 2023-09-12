@@ -2,25 +2,25 @@
 export const textInputs = [
   {
     id: "firstName",
-    label: "First Name",
+    label: "First Name:",
     placeholder: "Bilbo",
     errorMessage: "First name must be at least 2 characters long",
   },
   {
     id: "lastName",
-    label: "Last Name",
+    label: "Last Name:",
     placeholder: "Baggins",
     errorMessage: "Last name must be at least 2 characters long",
   },
   {
     id: "email",
-    label: "Email",
+    label: "Email:",
     placeholder: "bilbo-baggins@adventurehobbits.net",
     errorMessage: "Email is Invalid",
   },
   {
     id: "city",
-    label: "City",
+    label: "City:",
     placeholder: "Hobbiton",
     errorMessage: "City is Invalid",
     list: "cities",
@@ -59,9 +59,9 @@ export const phoneInputs = [
 ];
 
 export const profileInfos = [
-  { label: "Email", id: "email" },
-  { label: "First Name", id: "firstName" },
-  { label: "Last Name", id: "lastName" },
-  { label: "City", id: "city" },
-  { label: "Phone", id: "phone" },
+  { label: "Email:", id: "email" },
+  { label: "First Name:", id: "firstName" },
+  { label: "Last Name:", id: "lastName" },
+  { label: "City:", id: "city" },
+  { label: "Phone:", id: "phone" },
 ];
