@@ -2,7 +2,12 @@ import { useRef, useState } from "react";
 import { ErrorMessage } from "../ErrorMessage";
 import { FunctionalTextInput } from "./FunctionalTextInput";
 import { FunctionalPhoneInput } from "./FunctionalPhoneInput";
-import { containsOnlyDigits } from "../utils/validations";
+import {
+  containsOnlyDigits,
+  isNameValid,
+  isEmailValid,
+} from "../utils/validations";
+import { allCities } from "../utils/all-cities";
 
 export const FunctionalForm = ({
   hasFailedSubmission,
@@ -32,6 +37,30 @@ export const FunctionalForm = ({
     setUserData((prevState) => {
       return { ...prevState, [`${inputType}`]: value };
     });
+    // Set/reset errors in state, depending on the type of input this method is called on when changed:
+    if (inputType === "firstName" || inputType === "lastName") {
+      if (!isNameValid(e.target.value)) {
+        setErrors(inputType);
+      } else {
+        resetErrors(inputType);
+      }
+    } else if (inputType === "email") {
+      if (!isEmailValid(e.target.value)) {
+        setErrors(inputType);
+      } else {
+        resetErrors(inputType);
+      }
+    } else if (inputType === "city") {
+      if (
+        !allCities
+          .map((city) => city.toLowerCase())
+          .includes(e.target.value.toLowerCase())
+      ) {
+        setErrors(inputType);
+      } else {
+        resetErrors(inputType);
+      }
+    }
   };
 
   // Call onChange of phone inputs:
@@ -133,8 +162,6 @@ export const FunctionalForm = ({
       {/* Text inputs (first/last names, email) */}
       <FunctionalTextInput
         handleTextInputChange={handleTextInputChange}
-        setErrors={setErrors}
-        resetErrors={resetErrors}
         hasFailedSubmission={hasFailedSubmission}
         inputErrors={inputErrors}
         userData={userData}

@@ -1,12 +1,8 @@
 import { textInputs } from "../../constants";
-import { isNameValid, isEmailValid } from "../utils/validations";
 import { ErrorMessage } from "../ErrorMessage";
-import { allCities } from "../utils/all-cities";
 
 export const FunctionalTextInput = ({
   handleTextInputChange,
-  setErrors,
-  resetErrors,
   hasFailedSubmission,
   inputErrors,
   userData,
@@ -24,29 +20,6 @@ export const FunctionalTextInput = ({
               list={input.list ? input.list : undefined}
               onChange={(e) => {
                 handleTextInputChange(e, input.id);
-                if (input.id === "firstName" || input.id === "lastName") {
-                  if (!isNameValid(e.target.value)) {
-                    setErrors(input.id);
-                  } else {
-                    resetErrors(input.id);
-                  }
-                } else if (input.id === "email") {
-                  if (!isEmailValid(e.target.value)) {
-                    setErrors(input.id);
-                  } else {
-                    resetErrors(input.id);
-                  }
-                } else if (input.id === "city") {
-                  if (
-                    !allCities
-                      .map((city) => city.toLowerCase())
-                      .includes(e.target.value.toLowerCase())
-                  ) {
-                    setErrors(input.id);
-                  } else {
-                    resetErrors(input.id);
-                  }
-                }
               }}
             />
           </div>
