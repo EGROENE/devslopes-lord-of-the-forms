@@ -102,6 +102,7 @@ export const FunctionalForm = ({
         firstNameError: true,
         lastNameError: true,
         phoneError: true,
+        cityError: true,
       });
       setHasFailedSubmission(false);
       if (!hasFormBeenSubmittedAtLeastOnce) {
