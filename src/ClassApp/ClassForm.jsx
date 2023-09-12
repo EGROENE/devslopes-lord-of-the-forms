@@ -37,7 +37,7 @@ export class ClassForm extends Component {
           <label htmlFor="phone">Phone:</label>
           <ClassPhoneInput
             handlePhoneInput={handlePhoneInput}
-            userData={userData}
+            userDataPhone={userData.phone}
             phoneInputsParentElement={phoneInputsParentElement}
           />
         </div>

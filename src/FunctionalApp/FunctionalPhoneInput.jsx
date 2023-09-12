@@ -3,7 +3,7 @@ import { phoneInputs } from "../../constants";
 import { containsOnlyDigits } from "../utils/validations";
 
 export const FunctionalPhoneInput = ({
-  userData,
+  userDataPhone,
   setUserData,
   setErrors,
   resetErrors,
@@ -14,7 +14,7 @@ export const FunctionalPhoneInput = ({
   const handlePhoneInput = (index) => (e) => {
     const value = e.target.value;
     if (containsOnlyDigits(value)) {
-      const newPhoneState = userData.phone.map((phoneInput, phoneInputIndex) =>
+      const newPhoneState = userDataPhone.map((phoneInput, phoneInputIndex) =>
         index === phoneInputIndex ? value : phoneInput
       );
 
@@ -24,7 +24,7 @@ export const FunctionalPhoneInput = ({
       });
 
       // If length of string containing only the digits in userData.phone is not equal to 6 (account for delay in setting of state above), set inputErrors.phone to true; else, to false:
-      if (userData.phone.toString().replace(/,/g, "").length !== 6) {
+      if (userDataPhone.toString().replace(/,/g, "").length !== 6) {
         setErrors("phone");
       } else {
         resetErrors("phone");
@@ -52,7 +52,7 @@ export const FunctionalPhoneInput = ({
       {phoneInputs.map((input) => (
         <>
           <input
-            value={userData.phone[phoneInputs.indexOf(input)]}
+            value={userDataPhone[phoneInputs.indexOf(input)]}
             key={input.id}
             type={input.type}
             id={input.id}

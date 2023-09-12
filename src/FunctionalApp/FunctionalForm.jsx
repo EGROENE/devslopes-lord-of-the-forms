@@ -132,7 +132,7 @@ export const FunctionalForm = ({
       <div className="input-wrap">
         <label htmlFor="phone">Phone:</label>
         <FunctionalPhoneInput
-          userData={userData}
+          userDataPhone={userData.phone}
           setUserData={setUserData}
           setErrors={setErrors}
           resetErrors={resetErrors}
