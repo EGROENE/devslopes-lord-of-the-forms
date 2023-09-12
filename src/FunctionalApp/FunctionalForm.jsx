@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import { ErrorMessage } from "../ErrorMessage";
 import { FunctionalTextInput } from "./FunctionalTextInput";
-//import { allCities } from "../utils/all-cities";
 import { FunctionalPhoneInput } from "./FunctionalPhoneInput";
 import { containsOnlyDigits } from "../utils/validations";
 
