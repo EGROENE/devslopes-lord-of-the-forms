@@ -3,13 +3,7 @@ import { ProfileInformation } from "../ProfileInformation";
 import { FunctionalForm } from "./FunctionalForm";
 
 export const FunctionalApp = () => {
-  const [prevUserData, setPrevUserData] = useState({
-    email: "",
-    firstName: "",
-    lastName: "",
-    phone: "",
-    city: "",
-  });
+  const [prevUserData, setPrevUserData] = useState(null);
 
   // Define hasFormBeenSubmittedAtLeastOnce & its setter here, since it'll be passed into multiple child components
   const [hasFormBeenSubmittedAtLeastOnce, setHasFormBeenSubmittedAtLeastOnce] =
