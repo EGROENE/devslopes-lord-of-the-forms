@@ -1,25 +1,25 @@
 // Export this into ClassTextInput
 export const textInputs = [
   {
-    id: "firstName",
+    key: "firstName",
     label: "First Name:",
     placeholder: "Bilbo",
     errorMessage: "First name must be at least 2 characters long",
   },
   {
-    id: "lastName",
+    key: "lastName",
     label: "Last Name:",
     placeholder: "Baggins",
     errorMessage: "Last name must be at least 2 characters long",
   },
   {
-    id: "email",
+    key: "email",
     label: "Email:",
     placeholder: "bilbo-baggins@adventurehobbits.net",
     errorMessage: "Email is Invalid",
   },
   {
-    id: "city",
+    key: "city",
     label: "City:",
     placeholder: "Hobbiton",
     errorMessage: "City is Invalid",
@@ -59,9 +59,9 @@ export const phoneInputs = [
 ];
 
 export const profileInfos = [
-  { label: "Email:", id: "email" },
-  { label: "First Name:", id: "firstName" },
-  { label: "Last Name:", id: "lastName" },
-  { label: "City:", id: "city" },
-  { label: "Phone:", id: "phone" },
+  { label: "Email:", key: "email" },
+  { label: "First Name:", key: "firstName" },
+  { label: "Last Name:", key: "lastName" },
+  { label: "City:", key: "city" },
+  { label: "Phone:", key: "phone" },
 ];
