@@ -1,4 +1,4 @@
-import { profileInfos } from "../constants";
+//import { profileInfos } from "../constants";
 import { capitalize, formatPhoneNumber } from "./utils/transformations";
 
 export const InfoRow = ({ label, value }) => {
@@ -11,46 +11,68 @@ export const InfoRow = ({ label, value }) => {
     </div>
   );
 };
-export const ProfileInformation = ({
-  prevUserData,
-  hasFormBeenSubmittedAtLeastOnce,
-}) => {
-  const setProfileInfoValue = (id) => {
-    if (id.includes("Name")) {
-      return capitalize(prevUserData[`${id}`]);
-    } else if (id.includes("phone")) {
-      return formatPhoneNumber(prevUserData[`${id}`]);
-    } else {
-      return prevUserData[`${id}`];
-    }
-  };
-  if (hasFormBeenSubmittedAtLeastOnce) {
-    return (
-      <>
-        <u>
-          <h3>Your Submitted User Information</h3>
-        </u>
-        <div className="user-info">
-          {profileInfos.map((info) => (
+
+// Wtf is this? How exactly do I get the right key-value pair from this...object?
+// Getting correct pair by info.key in value if InfoRow below results in undefined in at least one instance
+// Maybe put ? after keys, as they may not exist
+// Maybe just use repetitive inputs in JSX below, setting value of each to captilize(user.firstName), for example. Abstracting these isn't worth the headache, and it may be overkill for a short form like this to produce form inputs automatically from an object instead of hardcoding it.
+/* const formatUserData = (user) => ({
+  ...user,
+  firstName: capitalize(user.firstName),
+  lastName: capitalize(user.lastName),
+  phone: formatPhoneNumber(user.phone),
+}); */
+
+export const ProfileInformation = ({ user }) => {
+  return (
+    <>
+      <u>
+        <h3>Your Submitted User Information</h3>
+      </u>
+      <div className="user-info">
+        {/* {user &&
+          profileInfos.map((info) => (
             <InfoRow
-              key={info.id}
+              key={info.key}
               label={info.label}
-              value={setProfileInfoValue(info.id).trim()}
+              //value={user[`${info.key}`]}
+              //value={formatUserData(user)[info.key].trim()}
+              //value={formatUserData[info.key].trim()}
+              //value={capitalize(user.firstName).trim()}
             />
-          ))}
-        </div>
-      </>
-    );
-  } else {
-    return (
-      <>
-        <u>
-          <h3>Your Submitted User Information</h3>
-        </u>
-        <div className="user-info">
-          <div>No information provided</div>
-        </div>
-      </>
-    );
-  }
+          ))} */}
+        {user && (
+          <>
+            <InfoRow
+              key="email"
+              label="Email:"
+              value={user.email && capitalize(user.email).trim()}
+            />
+            <InfoRow
+              key="firstName"
+              label="First Name:"
+              value={user.firstName && capitalize(user.firstName).trim()}
+            />
+            <InfoRow
+              key="lastName"
+              label="Last Name:"
+              value={user.lastName && capitalize(user.lastName).trim()}
+            />
+            <InfoRow
+              key="city"
+              label="City:"
+              value={user.city && capitalize(user.city).trim()}
+            />
+            <InfoRow
+              key="phone"
+              label="Phone:"
+              value={user.phone && formatPhoneNumber(user.phone)}
+            />
+          </>
+        )}
+        {/* !user && <div>No information provided</div> */}
+        {!user && <div>No information provided</div>}
+      </div>
+    </>
+  );
 };
