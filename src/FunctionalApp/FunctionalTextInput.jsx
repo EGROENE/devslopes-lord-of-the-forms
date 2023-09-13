@@ -6,14 +6,14 @@ import { allCities } from "../utils/all-cities";
 export const FunctionalTextInput = ({
   setErrors,
   resetErrors,
-  setUserData,
   hasFailedSubmission,
   inputErrors,
-  userData,
+  newUserInputs,
+  setNewUserInputs,
 }) => {
   const handleNonPhoneTextInput = (e, inputType) => {
     const value = e.target.value;
-    setUserData((prevState) => {
+    setNewUserInputs((prevState) => {
       return { ...prevState, [`${inputType}`]: value };
     });
     // Set/reset errors in state, depending on the type of input this method is called on when changed:
@@ -45,23 +45,25 @@ export const FunctionalTextInput = ({
   return (
     <>
       {textInputs.map((input) => (
-        <div key={input.id}>
+        <div key={input.key}>
           <div className="input-wrap">
             <label>{input.label}</label>
             <input
               type="text"
               placeholder={input.placeholder}
-              value={userData[`${input.id}`]}
+              value={
+                newUserInputs !== null ? newUserInputs[`${input.key}`] : ""
+              }
               list={input.list ? input.list : undefined}
               onChange={(e) => {
-                handleNonPhoneTextInput(e, input.id);
+                handleNonPhoneTextInput(e, input.key);
               }}
             />
           </div>
           {hasFailedSubmission && (
             <ErrorMessage
               message={input.errorMessage}
-              show={inputErrors[`${input.id}Error`]}
+              show={inputErrors[`${input.key}Error`]}
             />
           )}
         </div>

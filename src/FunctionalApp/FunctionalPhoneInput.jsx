@@ -3,10 +3,10 @@ import { phoneInputs } from "../../constants";
 import { containsOnlyDigits } from "../utils/validations";
 
 export const FunctionalPhoneInput = ({
-  userDataPhone,
-  setUserData,
   setErrors,
   resetErrors,
+  newUserPhone,
+  setNewUserInputs,
 }) => {
   const phoneInputsParentElement = useRef(0);
 
@@ -14,17 +14,17 @@ export const FunctionalPhoneInput = ({
   const handlePhoneInput = (index) => (e) => {
     const value = e.target.value;
     if (containsOnlyDigits(value)) {
-      const newPhoneState = userDataPhone.map((phoneInput, phoneInputIndex) =>
+      const newPhoneState = newUserPhone.map((phoneInput, phoneInputIndex) =>
         index === phoneInputIndex ? value : phoneInput
       );
 
       // Set phone array in state to updated state array
-      setUserData((prevState) => {
+      setNewUserInputs((prevState) => {
         return { ...prevState, phone: newPhoneState };
       });
 
       // If length of string containing only the digits in userData.phone is not equal to 6 (account for delay in setting of state above), set inputErrors.phone to true; else, to false:
-      if (userDataPhone.toString().replace(/,/g, "").length !== 6) {
+      if (newUserPhone.toString().replace(/,/g, "").length !== 6) {
         setErrors("phone");
       } else {
         resetErrors("phone");
@@ -52,7 +52,7 @@ export const FunctionalPhoneInput = ({
       {phoneInputs.map((input) => (
         <>
           <input
-            value={userDataPhone[phoneInputs.indexOf(input)]}
+            value={newUserPhone && newUserPhone[phoneInputs.indexOf(input)]}
             key={input.id}
             type={input.type}
             id={input.id}
