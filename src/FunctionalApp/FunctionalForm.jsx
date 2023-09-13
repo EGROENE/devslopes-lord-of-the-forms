@@ -3,12 +3,8 @@ import { ErrorMessage } from "../ErrorMessage";
 import { FunctionalTextInput } from "./FunctionalTextInput";
 import { FunctionalPhoneInput } from "./FunctionalPhoneInput";
 
-export const FunctionalForm = ({
-  setPrevUserData,
-  hasFormBeenSubmittedAtLeastOnce,
-  setHasFormBeenSubmittedAtLeastOnce,
-}) => {
-  const [userData, setUserData] = useState({
+export const FunctionalForm = ({ setUser }) => {
+  const [newUserInputs, setNewUserInputs] = useState({
     email: "",
     firstName: "",
     lastName: "",
@@ -38,6 +34,7 @@ export const FunctionalForm = ({
     });
   };
 
+  // Reset newUserInputs after setUser to newUserInputs, maybe using prevState. Only do this if there are no errors.
   const handleSubmission = (e) => {
     e.preventDefault();
 
@@ -46,14 +43,8 @@ export const FunctionalForm = ({
     );
     // If no errors...
     if (areNoErrors) {
-      setPrevUserData({
-        email: userData.email,
-        firstName: userData.firstName,
-        lastName: userData.lastName,
-        phone: userData.phone,
-        city: userData.city,
-      });
-      setUserData({
+      setUser({ ...newUserInputs });
+      setNewUserInputs({
         email: "",
         firstName: "",
         lastName: "",
@@ -68,9 +59,6 @@ export const FunctionalForm = ({
         cityError: true,
       });
       setHasFailedSubmission(false);
-      if (!hasFormBeenSubmittedAtLeastOnce) {
-        setHasFormBeenSubmittedAtLeastOnce(true);
-      }
     } else {
       // ELSE...
       alert("Bad inputs.");
@@ -88,20 +76,20 @@ export const FunctionalForm = ({
       <FunctionalTextInput
         hasFailedSubmission={hasFailedSubmission}
         inputErrors={inputErrors}
-        userData={userData}
-        setUserData={setUserData}
         setErrors={setErrors}
         resetErrors={resetErrors}
+        newUserInputs={newUserInputs}
+        setNewUserInputs={setNewUserInputs}
       />
 
       {/* Phone inputs */}
       <div className="input-wrap">
         <label htmlFor="phone">Phone:</label>
         <FunctionalPhoneInput
-          userDataPhone={userData.phone}
-          setUserData={setUserData}
           setErrors={setErrors}
           resetErrors={resetErrors}
+          newUserPhone={newUserInputs.phone}
+          setNewUserInputs={setNewUserInputs}
         />
       </div>
       {hasFailedSubmission && (
