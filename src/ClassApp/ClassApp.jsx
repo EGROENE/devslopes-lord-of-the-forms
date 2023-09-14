@@ -4,28 +4,25 @@ import { ProfileInformation } from "../ProfileInformation";
 import { containsOnlyDigits } from "../utils/validations";
 
 export class ClassApp extends React.Component {
-  constructor(props) {
-    super(props);
-    this.phoneInputsParentElement = React.createRef();
-    this.state = {
-      userData: {
-        email: "",
-        firstName: "",
-        lastName: "",
-        phone: ["", "", "", ""],
-        city: "",
-      },
-      inputErrors: {
-        emailError: true,
-        firstNameError: true,
-        lastNameError: true,
-        phoneError: true,
-        cityError: true,
-      },
-      hasFailedSubmission: false,
-      hasFormBeenSubmittedAtLeastOnce: false,
-    };
-  }
+  phoneInputsParentElement = React.createRef();
+  state = {
+    userData: {
+      email: "",
+      firstName: "",
+      lastName: "",
+      phone: ["", "", "", ""],
+      city: "",
+    },
+    inputErrors: {
+      emailError: true,
+      firstNameError: true,
+      lastNameError: true,
+      phoneError: true,
+      cityError: true,
+    },
+    hasFailedSubmission: false,
+    hasFormBeenSubmittedAtLeastOnce: false,
+  };
 
   // Call onChange of all fields except phone inputs:
   handleNonPhoneTextInput = (e, inputType) => {
