@@ -51,7 +51,7 @@ export const FunctionalPhoneInput = ({
       {phoneInputs.map((input) => (
         <>
           <input
-            value={newUserPhone && newUserPhone[phoneInputs.indexOf(input)]}
+            value={newUserPhone[phoneInputs.indexOf(input)]}
             key={input.id}
             type={input.type}
             id={input.id}
