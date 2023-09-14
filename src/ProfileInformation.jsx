@@ -46,27 +46,27 @@ export const ProfileInformation = ({ user }) => {
             <InfoRow
               key="email"
               label="Email:"
-              value={user.email && capitalize(user.email).trim()}
+              value={capitalize(user.email).trim()}
             />
             <InfoRow
               key="firstName"
               label="First Name:"
-              value={user.firstName && capitalize(user.firstName).trim()}
+              value={capitalize(user.firstName).trim()}
             />
             <InfoRow
               key="lastName"
               label="Last Name:"
-              value={user.lastName && capitalize(user.lastName).trim()}
+              value={capitalize(user.lastName).trim()}
             />
             <InfoRow
               key="city"
               label="City:"
-              value={user.city && capitalize(user.city).trim()}
+              value={capitalize(user.city).trim()}
             />
             <InfoRow
               key="phone"
               label="Phone:"
-              value={user.phone && formatPhoneNumber(user.phone)}
+              value={formatPhoneNumber(user.phone)}
             />
           </>
         )}
