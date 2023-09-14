@@ -12,10 +12,7 @@ export const InfoRow = ({ label, value }) => {
   );
 };
 
-// Wtf is this? How exactly do I get the right key-value pair from this...object?
-// Getting correct pair by info.key in value if InfoRow below results in undefined in at least one instance
-// Maybe put ? after keys, as they may not exist
-// Maybe just use repetitive inputs in JSX below, setting value of each to captilize(user.firstName), for example. Abstracting these isn't worth the headache, and it may be overkill for a short form like this to produce form inputs automatically from an object instead of hardcoding it.
+// Why doesn't formatUserData + profileInfos.map() work?
 /* const formatUserData = (user) => ({
   ...user,
   firstName: capitalize(user.firstName),
@@ -70,7 +67,6 @@ export const ProfileInformation = ({ user }) => {
             />
           </>
         )}
-        {/* !user && <div>No information provided</div> */}
         {!user && <div>No information provided</div>}
       </div>
     </>
