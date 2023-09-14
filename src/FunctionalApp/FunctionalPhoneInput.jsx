@@ -3,10 +3,9 @@ import { phoneInputs } from "../../constants";
 import { containsOnlyDigits } from "../utils/validations";
 
 export const FunctionalPhoneInput = ({
-  setErrors,
-  resetErrors,
   newUserPhone,
   setNewUserInputs,
+  setIsNoPhoneError,
 }) => {
   const phoneInputsParentElement = useRef(0);
 
@@ -23,11 +22,11 @@ export const FunctionalPhoneInput = ({
         return { ...prevState, phone: newPhoneState };
       });
 
-      // If length of string containing only the digits in userData.phone is not equal to 6 (account for delay in setting of state above), set inputErrors.phone to true; else, to false:
+      /* If length of string containing only the digits in newUserPhone is not equal to 6 (account for delay in setting of state above), set isNoPhoneError to true; else, to false: */
       if (newUserPhone.toString().replace(/,/g, "").length !== 6) {
-        setErrors("phone");
+        setIsNoPhoneError(false);
       } else {
-        resetErrors("phone");
+        setIsNoPhoneError(true);
       }
 
       // Logic to autoskip back & forth b/t phone-input fields:

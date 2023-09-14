@@ -4,43 +4,38 @@ import { isEmailValid, isNameValid } from "../utils/validations";
 import { allCities } from "../utils/all-cities";
 
 export const FunctionalTextInput = ({
-  setErrors,
-  resetErrors,
   hasFailedSubmission,
-  inputErrors,
   newUserInputs,
   setNewUserInputs,
+  setAreNoTextInputErrors,
 }) => {
   const handleNonPhoneTextInput = (e, inputType) => {
     const value = e.target.value;
     setNewUserInputs((prevState) => {
       return { ...prevState, [`${inputType}`]: value };
     });
-    // Set/reset errors in state, depending on the type of input this method is called on when changed:
-    if (inputType === "firstName" || inputType === "lastName") {
-      if (!isNameValid(e.target.value)) {
-        setErrors(inputType);
-      } else {
-        resetErrors(inputType);
-      }
-    } else if (inputType === "email") {
-      if (!isEmailValid(e.target.value)) {
-        setErrors(inputType);
-      } else {
-        resetErrors(inputType);
-      }
-    } else if (inputType === "city") {
-      if (
-        !allCities
-          .map((city) => city.toLowerCase())
-          .includes(e.target.value.toLowerCase())
-      ) {
-        setErrors(inputType);
-      } else {
-        resetErrors(inputType);
-      }
-    }
   };
+
+  const firstNameIsValid = isNameValid(newUserInputs.firstName);
+
+  const lastNameIsValid = isNameValid(newUserInputs.lastName);
+
+  const emailIsValid = isEmailValid(newUserInputs.email);
+
+  const cityIsValid = allCities
+    .map((city) => city.toLowerCase())
+    .includes(newUserInputs.city.toLowerCase().trim());
+
+  const nonPhoneValidityCheckers = {
+    firstNameIsValid: firstNameIsValid,
+    lastNameIsValid: lastNameIsValid,
+    emailIsValid: emailIsValid,
+    cityIsValid: cityIsValid,
+  };
+  // areNoTextInputErrors is set to true if all values of nonPhoneValidityCheckers are true; else, it is set to false.
+  setAreNoTextInputErrors(
+    Object.values(nonPhoneValidityCheckers).every((value) => value === true)
+  );
 
   return (
     <>
@@ -63,7 +58,7 @@ export const FunctionalTextInput = ({
           {hasFailedSubmission && (
             <ErrorMessage
               message={input.errorMessage}
-              show={inputErrors[`${input.key}Error`]}
+              show={!nonPhoneValidityCheckers[`${input.key}IsValid`]}
             />
           )}
         </div>

@@ -4,6 +4,7 @@ import { FunctionalTextInput } from "./FunctionalTextInput";
 import { FunctionalPhoneInput } from "./FunctionalPhoneInput";
 
 export const FunctionalForm = ({ setUser }) => {
+  /* Set to empty strings b/c values of input fields are set to these. If this were to be set to null, 'false' would appear in inputs if user hasn't entered anything. */
   const [newUserInputs, setNewUserInputs] = useState({
     email: "",
     firstName: "",
@@ -12,38 +13,22 @@ export const FunctionalForm = ({ setUser }) => {
     city: "",
   });
 
-  const [inputErrors, setInputErrors] = useState({
-    emailError: true,
-    firstNameError: true,
-    lastNameError: true,
-    phoneError: true,
-    cityError: true,
-  });
+  const [areNoTextInputErrors, setAreNoTextInputErrors] = useState(false);
+
+  const [isNoPhoneError, setIsNoPhoneError] = useState(false);
 
   const [hasFailedSubmission, setHasFailedSubmission] = useState(false);
 
-  const setErrors = (inputType) => {
-    setInputErrors((prevState) => {
-      return { ...prevState, [`${inputType}Error`]: true };
-    });
-  };
-
-  const resetErrors = (inputType) => {
-    setInputErrors((prevState) => {
-      return { ...prevState, [`${inputType}Error`]: false };
-    });
-  };
-
-  // Reset newUserInputs after setUser to newUserInputs, maybe using prevState. Only do this if there are no errors.
   const handleSubmission = (e) => {
     e.preventDefault();
 
-    const areNoErrors = Object.values(inputErrors).every(
-      (value) => value === false
-    );
+    const areNoErrors = areNoTextInputErrors && isNoPhoneError;
+
     // If no errors...
     if (areNoErrors) {
+      // Set 'registered' user account data. This data will appear in profile info box after successful submission.
       setUser({ ...newUserInputs });
+      /* Reset to empty strings b/c values of input fields are set to these. If this were to be set to null, 'false' would appear in inputs if user hasn't entered anything. */
       setNewUserInputs({
         email: "",
         firstName: "",
@@ -51,16 +36,8 @@ export const FunctionalForm = ({ setUser }) => {
         phone: ["", "", "", ""],
         city: "",
       });
-      setInputErrors({
-        emailError: true,
-        firstNameError: true,
-        lastNameError: true,
-        phoneError: true,
-        cityError: true,
-      });
       setHasFailedSubmission(false);
     } else {
-      // ELSE...
       alert("Bad inputs.");
       setHasFailedSubmission(true);
     }
@@ -75,28 +52,22 @@ export const FunctionalForm = ({ setUser }) => {
       {/* Text inputs (first/last names, email, city) */}
       <FunctionalTextInput
         hasFailedSubmission={hasFailedSubmission}
-        inputErrors={inputErrors}
-        setErrors={setErrors}
-        resetErrors={resetErrors}
         newUserInputs={newUserInputs}
         setNewUserInputs={setNewUserInputs}
+        setAreNoTextInputErrors={setAreNoTextInputErrors}
       />
 
       {/* Phone inputs */}
       <div className="input-wrap">
         <label htmlFor="phone">Phone:</label>
         <FunctionalPhoneInput
-          setErrors={setErrors}
-          resetErrors={resetErrors}
           newUserPhone={newUserInputs.phone}
           setNewUserInputs={setNewUserInputs}
+          setIsNoPhoneError={setIsNoPhoneError}
         />
       </div>
       {hasFailedSubmission && (
-        <ErrorMessage
-          message="Invalid Phone Number"
-          show={inputErrors.phoneError}
-        />
+        <ErrorMessage message="Invalid Phone Number" show={!isNoPhoneError} />
       )}
 
       <input type="submit" value="Submit" />
