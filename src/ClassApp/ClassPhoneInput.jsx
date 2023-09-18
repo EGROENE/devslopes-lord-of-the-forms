@@ -20,11 +20,9 @@ class ClassPhoneInput extends React.Component {
         setNewUserInputs(newPhoneState, "phone");
 
         // If length of string containing only the digits in userData.phone is not equal to 6 (account for delay in setting of state above), set inputErrors.phone to true; else, to false:
-        if (newUserPhone.toString().replace(/,/g, "").length !== 6) {
-          setIsNoPhoneError(false);
-        } else {
-          setIsNoPhoneError(true);
-        }
+        newUserPhone.toString().replace(/,/g, "").length !== 6
+          ? setIsNoPhoneError(false)
+          : setIsNoPhoneError(true);
 
         // Logic to autoskip back & forth b/t phone-input fields:
         const phoneInputDOMElements = Array.from(
