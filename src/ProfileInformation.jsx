@@ -1,4 +1,3 @@
-//import { profileInfos } from "../constants";
 import { capitalize, formatPhoneNumber } from "./utils/transformations";
 
 export const InfoRow = ({ label, value }) => {
@@ -12,14 +11,6 @@ export const InfoRow = ({ label, value }) => {
   );
 };
 
-// Why doesn't formatUserData + profileInfos.map() work?
-/* const formatUserData = (user) => ({
-  ...user,
-  firstName: capitalize(user.firstName),
-  lastName: capitalize(user.lastName),
-  phone: formatPhoneNumber(user.phone),
-}); */
-
 export const ProfileInformation = ({ user }) => {
   return (
     <>
@@ -27,17 +18,6 @@ export const ProfileInformation = ({ user }) => {
         <h3>Your Submitted User Information</h3>
       </u>
       <div className="user-info">
-        {/* {user &&
-          profileInfos.map((info) => (
-            <InfoRow
-              key={info.key}
-              label={info.label}
-              //value={user[`${info.key}`]}
-              //value={formatUserData(user)[info.key].trim()}
-              //value={formatUserData[info.key].trim()}
-              //value={capitalize(user.firstName).trim()}
-            />
-          ))} */}
         {user && (
           <>
             <InfoRow
