@@ -33,11 +33,7 @@ export const FunctionalTextInput = ({
     emailIsValid: emailIsValid,
     cityIsValid: cityIsValid,
   };
-  // areNoTextInputErrors is set to true if all values of nonPhoneValidityCheckers are true; else, it is set to false.
-  // setAreNoTextInputErrors outside of a useEffect throws: Warning: Cannot update a component (`FunctionalForm`) while rendering a different component (`FunctionalTextInput`). To locate the bad setState() call inside `FunctionalTextInput`, follow the stack trace as described in https://reactjs.org/link/setstate-in-render
-  /* setAreNoTextInputErrors(
-    Object.values(nonPhoneValidityCheckers).every((value) => value === true)
-  ); */
+
   useEffect(() => {
     setAreNoTextInputErrors(
       Object.values(nonPhoneValidityCheckers).every((value) => value === true)
@@ -53,9 +49,7 @@ export const FunctionalTextInput = ({
             <input
               type="text"
               placeholder={input.placeholder}
-              value={
-                newUserInputs !== null ? newUserInputs[`${input.key}`] : ""
-              }
+              value={newUserInputs[`${input.key}`]}
               list={input.list ? input.list : undefined}
               onChange={(e) => {
                 handleNonPhoneTextInput(e, input.key);

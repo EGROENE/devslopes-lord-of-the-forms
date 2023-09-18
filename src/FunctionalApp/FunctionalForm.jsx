@@ -24,7 +24,6 @@ export const FunctionalForm = ({ setUser }) => {
 
     const areNoErrors = areNoTextInputErrors && isNoPhoneError;
 
-    // If no errors...
     if (areNoErrors) {
       // Set 'registered' user account data. This data will appear in profile info box after successful submission.
       setUser({ ...newUserInputs });
