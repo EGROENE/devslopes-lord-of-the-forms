@@ -36,6 +36,7 @@ export const FunctionalForm = ({ setUser }) => {
         city: "",
       });
       setHasFailedSubmission(false);
+      setIsNoPhoneError(false)
     } else {
       alert("Bad inputs.");
       setHasFailedSubmission(true);
