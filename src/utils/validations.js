@@ -22,3 +22,13 @@ export function containsOnlyDigits(value) {
   const regex = /^[0-9]*$/;
   return !!value.match(regex);
 }
+
+/* Using containsOnlyDigits in this function isn't necessary, as it's already used on input value inside FunctionalPhoneInput. Otherwise, it would be used here. */
+// Expects an array
+export function isPhoneNumberValid(value) {
+  if (value.toString().replace(/,/g, "").length !== 7) {
+    return false;
+  } else {
+    return true;
+  }
+}
