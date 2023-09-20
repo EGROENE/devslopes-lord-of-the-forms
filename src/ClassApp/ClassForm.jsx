@@ -19,12 +19,8 @@ export class ClassForm extends React.Component {
       phone: ["", "", "", ""],
       city: "",
     },
-    areNoTextInputErrors: false,
-    isNoPhoneError: false,
     hasFailedSubmission: false,
   };
-
-  phoneInputsParentElement = React.createRef();
 
   setNewUserInputs = (value, inputType) => {
     this.setState((prevState) => ({
@@ -36,46 +32,7 @@ export class ClassForm extends React.Component {
     }));
   };
 
-  // value param is equal to a boolean
-  setAreNoTextInputErrors = (value) => {
-    this.setState((prevState) => ({
-      ...prevState,
-      areNoTextInputErrors: value,
-    }));
-  };
-
-  // value param is equal to a boolean
-  setIsNoPhoneError = (value) => {
-    this.setState((prevState) => ({
-      ...prevState,
-      isNoPhoneError: value,
-    }));
-  };
-
-  handleSubmission = (e) => {
-    e.preventDefault();
-    this.setState({
-      newUserInputs: {
-        email: "",
-        firstName: "",
-        lastName: "",
-        phone: ["", "", "", ""],
-        city: "",
-      },
-      hasFailedSubmission: false,
-      areNoTextInputErrors: false,
-      isNoPhoneError: false,
-    });
-  };
-
-  handleFormRejection = (e) => {
-    e.preventDefault();
-    alert("Bad inputs.");
-    this.setState((prevState) => ({
-      ...prevState,
-      hasFailedSubmission: true,
-    }));
-  };
+  phoneInputsParentElement = React.createRef();
 
   render() {
     const { setUser } = this.props;
@@ -103,24 +60,35 @@ export class ClassForm extends React.Component {
       phoneNumberIsValid: phoneNumberIsValid,
     };
 
-    const areNoErrors =
-      Object.values(validityCheckers).every((value) => value === true) &&
-      this.state.isNoPhoneError;
+    const areNoErrors = Object.values(validityCheckers).every(
+      (value) => value === true
+    );
 
-    // Called if there are no errors onSubmit of form. Sets user in state of ClassApp & resets state values of this component.
-    const setUserAndHandleSubmission = (e) => {
-      setUser(this.state.newUserInputs);
-      this.handleSubmission(e);
+    const handleSubmission = (e) => {
+      e.preventDefault();
+      if (areNoErrors) {
+        setUser(this.state.newUserInputs);
+        this.setState({
+          newUserInputs: {
+            email: "",
+            firstName: "",
+            lastName: "",
+            phone: ["", "", "", ""],
+            city: "",
+          },
+          hasFailedSubmission: false,
+        });
+      } else {
+        alert("Bad inputs.");
+        this.setState((prevState) => ({
+          ...prevState,
+          hasFailedSubmission: true,
+        }));
+      }
     };
 
     return (
-      <form
-        onSubmit={(e) =>
-          areNoErrors
-            ? setUserAndHandleSubmission(e)
-            : this.handleFormRejection(e)
-        }
-      >
+      <form onSubmit={handleSubmission}>
         <u>
           <h3>User Information Form</h3>
         </u>
@@ -164,7 +132,7 @@ export class ClassForm extends React.Component {
         {this.state.hasFailedSubmission && (
           <ErrorMessage
             message="Invalid Phone Number"
-            show={!this.state.isNoPhoneError}
+            show={!validityCheckers.phoneNumberIsValid}
           />
         )}
 
