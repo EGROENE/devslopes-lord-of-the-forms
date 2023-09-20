@@ -12,6 +12,7 @@ import { textInputs, phoneInputs } from "../../constants";
 
 export class ClassForm extends React.Component {
   state = {
+    /* Set to empty strings b/c values of input fields are set to these. If this were to be set to null, 'false' would appear in inputs if user hasn't entered anything. */
     newUserInputs: {
       email: "",
       firstName: "",
@@ -32,11 +33,13 @@ export class ClassForm extends React.Component {
     }));
   };
 
+  // This DOM parent for phone inputs is in this component, as FunctionalPhoneInput component produces only one phone input field
   phoneInputsParentElement = React.createRef();
 
   render() {
     const { setUser } = this.props;
 
+    // Validation of inputs:
     const firstNameIsValid = isNameValid(this.state.newUserInputs.firstName);
 
     const lastNameIsValid = isNameValid(this.state.newUserInputs.lastName);
@@ -51,7 +54,6 @@ export class ClassForm extends React.Component {
       this.state.newUserInputs.phone
     );
 
-    // Yes, I know the name sounds stupid, lol
     const validityCheckers = {
       firstNameIsValid: firstNameIsValid,
       lastNameIsValid: lastNameIsValid,
@@ -67,6 +69,7 @@ export class ClassForm extends React.Component {
     const handleSubmission = (e) => {
       e.preventDefault();
       if (areNoErrors) {
+        // Set 'registered' user account data. This data will appear in profile info box after successful submission.
         setUser(this.state.newUserInputs);
         this.setState({
           newUserInputs: {

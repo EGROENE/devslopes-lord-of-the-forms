@@ -22,10 +22,10 @@ export const FunctionalForm = ({ setUser }) => {
 
   const [hasFailedSubmission, setHasFailedSubmission] = useState(false);
 
-  // This DOM parent for phone inputs is in this component, as FunctionalPhoneInput component produces only one phone-input field
+  // This DOM parent for phone inputs is in this component, as FunctionalPhoneInput component produces only one phone input field
   const phoneInputsParentElement = useRef(0);
 
-  // Error handling:
+  // Validation of inputs:
   const firstNameIsValid = isNameValid(newUserInputs.firstName);
 
   const lastNameIsValid = isNameValid(newUserInputs.lastName);
@@ -56,7 +56,6 @@ export const FunctionalForm = ({ setUser }) => {
     if (areNoErrors) {
       // Set 'registered' user account data. This data will appear in profile info box after successful submission.
       setUser({ ...newUserInputs });
-      /* Reset to empty strings b/c values of input fields are set to these. If this were to be set to null, 'false' would appear in inputs if user hasn't entered anything. */
       setNewUserInputs({
         email: "",
         firstName: "",
