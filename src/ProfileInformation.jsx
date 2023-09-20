@@ -21,27 +21,27 @@ export const ProfileInformation = ({ user }) => {
         {user && (
           <>
             <InfoRow
-              key="email"
+              id="email"
               label="Email:"
               value={capitalize(user.email).trim()}
             />
             <InfoRow
-              key="firstName"
+              id="firstName"
               label="First Name:"
               value={capitalize(user.firstName).trim()}
             />
             <InfoRow
-              key="lastName"
+              id="lastName"
               label="Last Name:"
               value={capitalize(user.lastName).trim()}
             />
             <InfoRow
-              key="city"
+              id="city"
               label="City:"
               value={capitalize(user.city).trim()}
             />
             <InfoRow
-              key="phone"
+              id="phone"
               label="Phone:"
               value={formatPhoneNumber(user.phone)}
             />

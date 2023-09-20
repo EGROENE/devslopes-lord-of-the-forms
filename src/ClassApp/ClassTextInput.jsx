@@ -22,23 +22,23 @@ class ClassTextInput extends React.Component {
     return (
       <>
         {textInputs.map((input) => (
-          <div key={input.key}>
+          <div key={input.id}>
             <div className="input-wrap">
               <label>{input.label}</label>
               <input
                 type="text"
                 placeholder={input.placeholder}
-                value={newUserInputs[`${input.key}`]}
+                value={newUserInputs[`${input.id}`]}
                 list={input.list}
                 onChange={(e) => {
-                  handleNonPhoneTextInput(e, input.key);
+                  handleNonPhoneTextInput(e, input.id);
                 }}
               />
             </div>
             {hasFailedSubmission && (
               <ErrorMessage
                 message={input.errorMessage}
-                show={!nonPhoneValidityCheckers[`${input.key}IsValid`]}
+                show={!nonPhoneValidityCheckers[`${input.id}IsValid`]}
               />
             )}
           </div>
