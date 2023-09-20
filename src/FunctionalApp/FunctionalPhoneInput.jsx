@@ -1,5 +1,4 @@
 import { containsOnlyDigits } from "../utils/validations";
-import { phoneInputs } from "../../constants";
 
 export const FunctionalPhoneInput = ({
   newUserPhone,
@@ -11,6 +10,7 @@ export const FunctionalPhoneInput = ({
   placeholder,
   minLength,
   maxLength,
+  phoneInputsLength,
 }) => {
   // Call onChange of phone inputs:
   const handlePhoneInput = (index) => (e) => {
@@ -56,7 +56,7 @@ export const FunctionalPhoneInput = ({
         maxLength={maxLength}
         onChange={handlePhoneInput(inputIndexInPhoneInputs)}
       />
-      {inputIndexInPhoneInputs !== phoneInputs.length - 1 && " - "}
+      {inputIndexInPhoneInputs !== phoneInputsLength - 1 && " - "}
     </>
   );
 };

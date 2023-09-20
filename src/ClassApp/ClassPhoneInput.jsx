@@ -1,6 +1,5 @@
 import React from "react";
 import { containsOnlyDigits } from "../utils/validations";
-import { phoneInputs } from "../../constants";
 
 class ClassPhoneInput extends React.Component {
   render() {
@@ -14,6 +13,7 @@ class ClassPhoneInput extends React.Component {
       placeholder,
       minLength,
       maxLength,
+      phoneInputsLength
     } = this.props;
 
     const handlePhoneInput = (index) => (e) => {
@@ -59,7 +59,7 @@ class ClassPhoneInput extends React.Component {
           maxLength={maxLength}
           onChange={handlePhoneInput(inputIndexInPhoneInputs)}
         />
-        {inputIndexInPhoneInputs !== phoneInputs.length - 1 && " - "}
+        {inputIndexInPhoneInputs !== phoneInputsLength - 1 && " - "}
       </>
     );
   }

@@ -109,6 +109,7 @@ export const FunctionalForm = ({ setUser }) => {
               minLength={input.minLength}
               maxLength={input.maxLength}
               phoneInputsParentElement={phoneInputsParentElement}
+              phoneInputsLength={phoneInputs.length}
             />
           ))}
         </div>

@@ -125,6 +125,7 @@ export class ClassForm extends React.Component {
                 placeholder={input.placeholder}
                 minLength={input.minLength}
                 maxLength={input.maxLength}
+                phoneInputsLength={phoneInputs.length}
               />
             ))}
           </div>
