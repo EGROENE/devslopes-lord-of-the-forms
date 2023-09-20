@@ -1,16 +1,18 @@
 import React from "react";
-import { textInputs } from "../../constants";
-//import { isNameValid, isEmailValid } from "../utils/validations";
 import { ErrorMessage } from "../ErrorMessage";
-//import { allCities } from "../utils/all-cities";
 
 class ClassTextInput extends React.Component {
   render() {
     const {
       newUserInputs,
       setNewUserInputs,
+      id,
+      label,
+      placeholder,
+      list,
+      errorMessage,
       hasFailedSubmission,
-      nonPhoneValidityCheckers,
+      validityCheckers,
     } = this.props;
 
     // Declared here in render b/c some props are used
@@ -21,28 +23,29 @@ class ClassTextInput extends React.Component {
 
     return (
       <>
-        {textInputs.map((input) => (
-          <div key={input.id}>
-            <div className="input-wrap">
-              <label>{input.label}</label>
-              <input
-                type="text"
-                placeholder={input.placeholder}
-                value={newUserInputs[`${input.id}`]}
-                list={input.list}
-                onChange={(e) => {
-                  handleNonPhoneTextInput(e, input.id);
-                }}
-              />
-            </div>
-            {hasFailedSubmission && (
-              <ErrorMessage
-                message={input.errorMessage}
-                show={!nonPhoneValidityCheckers[`${input.id}IsValid`]}
-              />
-            )}
+        <div>
+          <div className="input-wrap">
+            <label htmlFor={id}>{label}</label>
+            <input
+              id={id}
+              autoComplete="on"
+              type="text"
+              inputMode="text"
+              placeholder={placeholder}
+              value={newUserInputs[`${id}`]}
+              list={list}
+              onChange={(e) => {
+                handleNonPhoneTextInput(e, id);
+              }}
+            />
           </div>
-        ))}
+          {hasFailedSubmission && (
+            <ErrorMessage
+              message={errorMessage}
+              show={!validityCheckers[`${id}IsValid`]}
+            />
+          )}
+        </div>
       </>
     );
   }

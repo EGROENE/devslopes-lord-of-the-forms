@@ -1,17 +1,21 @@
-import { useRef } from "react";
-import { phoneInputs } from "../../constants";
 import { containsOnlyDigits } from "../utils/validations";
+import { phoneInputs } from "../../constants";
 
 export const FunctionalPhoneInput = ({
   newUserPhone,
   setNewUserInputs,
-  setIsNoPhoneError,
+  id,
+  type,
+  phoneInputsParentElement,
+  inputIndexInPhoneInputs,
+  placeholder,
+  minLength,
+  maxLength,
 }) => {
-  const phoneInputsParentElement = useRef(0);
-
   // Call onChange of phone inputs:
   const handlePhoneInput = (index) => (e) => {
     const value = e.target.value;
+    // Call containsOnlyDigits here to only allow digits to be typed in
     if (containsOnlyDigits(value)) {
       const newPhoneState = newUserPhone.map((phoneInput, phoneInputIndex) =>
         index === phoneInputIndex ? value : phoneInput
@@ -21,13 +25,6 @@ export const FunctionalPhoneInput = ({
       setNewUserInputs((prevState) => {
         return { ...prevState, phone: newPhoneState };
       });
-
-      /* If length of string containing only the digits in newUserPhone is not equal to 6 (account for delay in setting of state above), set isNoPhoneError to true; else, to false: */
-      if (newUserPhone.toString().replace(/,/g, "").length !== 6) {
-        setIsNoPhoneError(false);
-      } else {
-        setIsNoPhoneError(true);
-      }
 
       // Logic to autoskip back & forth b/t phone-input fields:
       const phoneInputDOMElements = Array.from(
@@ -47,22 +44,19 @@ export const FunctionalPhoneInput = ({
   };
 
   return (
-    <div id="phone-input-wrap" ref={phoneInputsParentElement}>
-      {phoneInputs.map((input) => (
-        <>
-          <input
-            value={newUserPhone[phoneInputs.indexOf(input)]}
-            key={input.id}
-            type={input.type}
-            id={input.id}
-            placeholder={input.placeholder}
-            minLength={input.minLength}
-            maxLength={input.maxLength}
-            onChange={handlePhoneInput(phoneInputs.indexOf(input))}
-          />
-          {phoneInputs.indexOf(input) !== phoneInputs.length - 1 && " - "}
-        </>
-      ))}
-    </div>
+    <>
+      <input
+        value={newUserPhone[inputIndexInPhoneInputs]}
+        key={id}
+        type={type}
+        id={id}
+        inputMode="number"
+        placeholder={placeholder}
+        minLength={minLength}
+        maxLength={maxLength}
+        onChange={handlePhoneInput(inputIndexInPhoneInputs)}
+      />
+      {inputIndexInPhoneInputs !== phoneInputs.length - 1 && " - "}
+    </>
   );
 };

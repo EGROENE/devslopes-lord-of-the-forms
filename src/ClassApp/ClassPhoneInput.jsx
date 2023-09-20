@@ -1,11 +1,20 @@
 import React from "react";
-import { phoneInputs } from "../../constants";
 import { containsOnlyDigits } from "../utils/validations";
+import { phoneInputs } from "../../constants";
 
 class ClassPhoneInput extends React.Component {
-  phoneInputsParentElement = React.createRef();
   render() {
-    const { newUserPhone, setNewUserInputs, setIsNoPhoneError } = this.props;
+    const {
+      newUserPhone,
+      setNewUserInputs,
+      id,
+      type,
+      phoneInputsParentElement,
+      inputIndexInPhoneInputs,
+      placeholder,
+      minLength,
+      maxLength,
+    } = this.props;
 
     const handlePhoneInput = (index) => (e) => {
       const value = e.target.value;
@@ -19,14 +28,9 @@ class ClassPhoneInput extends React.Component {
         // Set phone array in state of ClassForm to newPhoneState:
         setNewUserInputs(newPhoneState, "phone");
 
-        // If length of string containing only the digits in userData.phone is not equal to 6 (account for delay in setting of state above), set inputErrors.phone to true; else, to false:
-        newUserPhone.toString().replace(/,/g, "").length !== 6
-          ? setIsNoPhoneError(false)
-          : setIsNoPhoneError(true);
-
         // Logic to autoskip back & forth b/t phone-input fields:
         const phoneInputDOMElements = Array.from(
-          this.phoneInputsParentElement.current.children
+          phoneInputsParentElement.current.children
         );
         // If length of input is equal to maxLength of its field, then focus the next field, if it exists:
         if (value.length === e.target.maxLength) {
@@ -43,23 +47,20 @@ class ClassPhoneInput extends React.Component {
     };
 
     return (
-      <div id="phone-input-wrap" ref={this.phoneInputsParentElement}>
-        {phoneInputs.map((input) => (
-          <>
-            <input
-              value={newUserPhone[phoneInputs.indexOf(input)]}
-              key={input.id}
-              type={input.type}
-              id={input.id}
-              placeholder={input.placeholder}
-              minLength={input.minLength}
-              maxLength={input.maxLength}
-              onChange={handlePhoneInput(phoneInputs.indexOf(input))}
-            />
-            {phoneInputs.indexOf(input) !== phoneInputs.length - 1 && " - "}
-          </>
-        ))}
-      </div>
+      <>
+        <input
+          value={newUserPhone[inputIndexInPhoneInputs]}
+          key={id}
+          type={type}
+          id={id}
+          inputMode="number"
+          placeholder={placeholder}
+          minLength={minLength}
+          maxLength={maxLength}
+          onChange={handlePhoneInput(inputIndexInPhoneInputs)}
+        />
+        {inputIndexInPhoneInputs !== phoneInputs.length - 1 && " - "}
+      </>
     );
   }
 }

@@ -1,11 +1,16 @@
-import { Component } from "react";
+import React from "react";
 import ClassTextInput from "./ClassTextInput";
 import ClassPhoneInput from "./ClassPhoneInput";
 import { ErrorMessage } from "../ErrorMessage";
-import { isEmailValid, isNameValid } from "../utils/validations";
+import {
+  isEmailValid,
+  isNameValid,
+  isPhoneNumberValid,
+} from "../utils/validations";
 import { allCities } from "../utils/all-cities";
+import { textInputs, phoneInputs } from "../../constants";
 
-export class ClassForm extends Component {
+export class ClassForm extends React.Component {
   state = {
     newUserInputs: {
       email: "",
@@ -18,6 +23,8 @@ export class ClassForm extends Component {
     isNoPhoneError: false,
     hasFailedSubmission: false,
   };
+
+  phoneInputsParentElement = React.createRef();
 
   setNewUserInputs = (value, inputType) => {
     this.setState((prevState) => ({
@@ -83,18 +90,22 @@ export class ClassForm extends Component {
       .map((city) => city.toLowerCase())
       .includes(this.state.newUserInputs.city.toLowerCase().trim());
 
+    const phoneNumberIsValid = isPhoneNumberValid(
+      this.state.newUserInputs.phone
+    );
+
     // Yes, I know the name sounds stupid, lol
-    const nonPhoneValidityCheckers = {
+    const validityCheckers = {
       firstNameIsValid: firstNameIsValid,
       lastNameIsValid: lastNameIsValid,
       emailIsValid: emailIsValid,
       cityIsValid: cityIsValid,
+      phoneNumberIsValid: phoneNumberIsValid,
     };
 
     const areNoErrors =
-      Object.values(nonPhoneValidityCheckers).every(
-        (value) => value === true
-      ) && this.state.isNoPhoneError;
+      Object.values(validityCheckers).every((value) => value === true) &&
+      this.state.isNoPhoneError;
 
     // Called if there are no errors onSubmit of form. Sets user in state of ClassApp & resets state values of this component.
     const setUserAndHandleSubmission = (e) => {
@@ -115,22 +126,40 @@ export class ClassForm extends Component {
         </u>
 
         {/* Text inputs (first/last names, email, city) */}
-        <ClassTextInput
-          nonPhoneValidityCheckers={nonPhoneValidityCheckers}
-          hasFailedSubmission={this.state.hasFailedSubmission}
-          newUserInputs={this.state.newUserInputs}
-          setNewUserInputs={this.setNewUserInputs}
-          setAreNoTextInputErrors={this.setAreNoTextInputErrors}
-        />
+        {textInputs.map((input) => (
+          <ClassTextInput
+            key={input.id}
+            newUserInputs={this.state.newUserInputs}
+            setNewUserInputs={this.setNewUserInputs}
+            id={input.id}
+            label={input.label}
+            placeholder={input.placeholder}
+            list={input.list}
+            errorMessage={input.errorMessage}
+            validityCheckers={validityCheckers}
+            hasFailedSubmission={this.state.hasFailedSubmission}
+          />
+        ))}
 
         {/* Phone inputs */}
         <div className="input-wrap">
           <label htmlFor="phone">Phone:</label>
-          <ClassPhoneInput
-            newUserPhone={this.state.newUserInputs.phone}
-            setNewUserInputs={this.setNewUserInputs}
-            setIsNoPhoneError={this.setIsNoPhoneError}
-          />
+          <div id="phone-input-wrap" ref={this.phoneInputsParentElement}>
+            {phoneInputs.map((input) => (
+              <ClassPhoneInput
+                key={input.id}
+                id={input.id}
+                phoneInputsParentElement={this.phoneInputsParentElement}
+                type={input.type}
+                newUserPhone={this.state.newUserInputs.phone}
+                setNewUserInputs={this.setNewUserInputs}
+                inputIndexInPhoneInputs={phoneInputs.indexOf(input)}
+                placeholder={input.placeholder}
+                minLength={input.minLength}
+                maxLength={input.maxLength}
+              />
+            ))}
+          </div>
         </div>
         {this.state.hasFailedSubmission && (
           <ErrorMessage
