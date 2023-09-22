@@ -1,23 +1,10 @@
 import { ErrorMessage } from "../ErrorMessage";
 
 export const FunctionalTextInput = ({
-  hasFailedSubmission,
-  newUserInputs,
-  setNewUserInputs,
-  id,
+  inputProps: { onChange, placeholder, id, list, value },
   label,
-  placeholder,
-  list,
   errorMessage,
-  validityCheckers,
 }) => {
-  const handleNonPhoneTextInput = (e, inputType) => {
-    const value = e.target.value;
-    setNewUserInputs((prevState) => {
-      return { ...prevState, [`${inputType}`]: value };
-    });
-  };
-
   return (
     <>
       <div>
@@ -29,18 +16,13 @@ export const FunctionalTextInput = ({
             type="text"
             inputMode="text"
             placeholder={placeholder}
-            value={newUserInputs[`${id}`]}
+            value={value}
             list={list ? list : undefined}
-            onChange={(e) => {
-              handleNonPhoneTextInput(e, id);
-            }}
+            onChange={onChange}
           />
         </div>
-        {hasFailedSubmission && (
-          <ErrorMessage
-            message={errorMessage}
-            show={!validityCheckers[`${id}IsValid`]}
-          />
+        {errorMessage && (
+          <ErrorMessage message={errorMessage} show={Boolean(errorMessage)} />
         )}
       </div>
     </>

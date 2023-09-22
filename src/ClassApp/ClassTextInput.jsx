@@ -3,47 +3,26 @@ import { ErrorMessage } from "../ErrorMessage";
 
 class ClassTextInput extends React.Component {
   render() {
-    const {
-      newUserInputs,
-      setNewUserInputs,
-      id,
-      label,
-      placeholder,
-      list,
-      errorMessage,
-      hasFailedSubmission,
-      validityCheckers,
-    } = this.props;
-
-    // Declared here in render b/c some props are used
-    const handleNonPhoneTextInput = (e, inputType) => {
-      const value = e.target.value;
-      setNewUserInputs(value, inputType);
-    };
+    const { inputProps, label, errorMessage } = this.props;
 
     return (
       <>
         <div>
           <div className="input-wrap">
-            <label htmlFor={id}>{label}</label>
+            <label htmlFor={inputProps.id}>{label}</label>
             <input
-              id={id}
+              id={inputProps.id}
               autoComplete="on"
               type="text"
               inputMode="text"
-              placeholder={placeholder}
-              value={newUserInputs[`${id}`]}
-              list={list}
-              onChange={(e) => {
-                handleNonPhoneTextInput(e, id);
-              }}
+              placeholder={inputProps.placeholder}
+              value={inputProps.value}
+              list={inputProps.list}
+              onChange={inputProps.onChange}
             />
           </div>
-          {hasFailedSubmission && (
-            <ErrorMessage
-              message={errorMessage}
-              show={!validityCheckers[`${id}IsValid`]}
-            />
+          {errorMessage && (
+            <ErrorMessage message={errorMessage} show={Boolean(errorMessage)} />
           )}
         </div>
       </>
